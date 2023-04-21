@@ -4,27 +4,36 @@ class Program
 {
     static void Main(string[] args)
     {
-        Random randomGenerator = new Random();
-        int uNumber = randomGenerator.Next(1, 100);
-
-        int uGuess;
+        string playAgain;
 
         do{
-            Console.Write("What is your guess? ");
-            uGuess = int.Parse(Console.ReadLine());
+            Random randomGenerator = new Random();
+            int uNumber = randomGenerator.Next(1, 100);
 
-            if (uGuess > uNumber)
-            {
-                Console.WriteLine("Lower");
+            int uGuess;
+            int guessCount = 0;
+
+            do{
+                Console.Write("What is your guess? ");
+                uGuess = int.Parse(Console.ReadLine());
+                guessCount++;
+
+                if (uGuess > uNumber)
+                {
+                    Console.WriteLine("Lower");
+                }
+                else if (uGuess < uNumber)
+                {
+                    Console.WriteLine("Higher");
+                }
+                else{
+                    Console.WriteLine($"Congratulations! You guessed the magic number in {guessCount} turn(s).");
+                }
             }
-            else if (uGuess < uNumber)
-            {
-                Console.WriteLine("Higher");
-            }
-            else{
-                Console.Write("Congratulations!");
-            }
+            while (!(uGuess == uNumber));
+            Console.WriteLine("Would you like to play again? (yes/no) ");
+            playAgain = Console.ReadLine();
         }
-        while (!(uGuess == uNumber));
+        while (!(playAgain == "no"));
     }
 }
