@@ -8,7 +8,7 @@ class Program
 
         do{
             Random randomGenerator = new Random();
-            int uNumber = randomGenerator.Next(1, 100);
+            int uNumber = randomGenerator.Next(1, 101);
 
             int uGuess;
             int guessCount = 0;
