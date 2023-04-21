@@ -26,6 +26,11 @@ class Program
         double squaredNum = Math.Pow(num, 2);
         return squaredNum;
     }
+
+    static void NameNumber(string name, double number)
+    {
+        Console.Write($"{name}, the square of your number is {number}"); 
+    }
     static void Main(string[] args)
     {
         string uName;
@@ -37,7 +42,7 @@ class Program
         uNum = FavNumber();
         squaredNum = SquareNumbers(uNum);
 
-        Console.Write($"{uName}, the square of your number is {squaredNum}");       
+        NameNumber(uName, squaredNum);       
         
     }
 }
