@@ -50,7 +50,7 @@ class Program
             gradeModifier = "-";
         }
 
-        Console.WriteLine($"Your grade is {gradeModifier}{letterGrade}");
+        Console.WriteLine($"Your grade is {letterGrade}{gradeModifier}.");
 
         if (numericPercentage >= 70)
         {
