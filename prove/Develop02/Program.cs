@@ -9,6 +9,8 @@ class Program
         string option = "";
         Entry newEntry = new Entry();
 
+        DateTime newDate = DateTime.Now;
+
         while (option != "5"){
             Journal journal = new Journal();
             option = journal.Prompt();
@@ -26,16 +28,12 @@ class Program
             }
             else if(option == "3")
             {
-                newEntry.SaveEntries();
+                journal.SaveEntries(newEntry._entries);
             }
             else if(option == "4")
             {
-                List<string> loadedFile = newEntry.LoadEntries();
-
-                foreach (string line in loadedFile)
-                {
-                    newEntry._entries.Add(line);
-                }
+                journal.LoadEntries(newEntry);
+                
             }
         }
     }

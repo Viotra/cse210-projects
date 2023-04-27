@@ -1,0 +1,115 @@
+REVIEW PROGRAM SPECIFICATION
+
+    What does the program do?
+        - Keeping a journal
+        - Making it easier to keep a journal by creating an app
+        - BUilds a habit
+        - Saving daily information
+        - keeps track of entries
+        - Provides prompts
+        - tracks date and time
+        - Save entries to an external file
+        - Load external files
+
+    What user inputs does it have?
+        - Menu
+            - New entry
+            - Read entry
+            - Save entry - file name
+            - Load entry - file name
+            - Quit
+
+    What output does it produce?
+        - Entries (external and temporary files)
+        - Prompts
+        - Menu
+
+    How does the program end?
+        - Quitting (Menu option 5)
+
+DETERMINE THE CLASSES
+
+    What are good candidates for classes in this program?
+        - Journal
+        - Prompts (Optional)
+        - Entries
+        - Program
+        - Files (Optional - save and load functions)
+
+    What are the primary responsibilities of each class?
+        - Journal
+            - Keep the journal
+            - Menu
+            - Calling classes
+            - Save journal owner (attribute)
+
+        - Prompts (Optional)
+            - Create/provide prompts
+            - Selects random prompt (stretch)
+                - Store prompt list
+            
+        - Entries
+            - Accepting user entries
+            - Storing user entries
+            - Load Entries (depending on program design)
+
+        - Program
+            - Call main function
+            - Call other classes
+            - Abstract the program
+            
+        - Files (Optional - save and load functions)
+            - Save Entries
+            - Load entries
+            - Keep list of saved files (stretch)
+                - include "over-write/edit" option
+
+DEFINE CLASS BEHAVIORS
+
+    Go through each of your classes and ask:
+
+        What are the behaviors this class will have in order to fulfill its responsibilities? (In other words, what things should this class do?)
+           
+            Program Class
+                public static void main()
+                Loop through menu options using while, if else, a switch, Do-While
+
+            Journal Class
+                - provide code for each menu function
+                - list for entries?
+                - GetPrompt()
+
+            Entry Class
+                - LoadEntry()
+                - SaveEntry()
+                - Provide a format for the entries, use DateTime()
+
+DEFINE CLASS ATTRIBUTES
+
+    Go through each of your classes and ask:
+
+        What attributes does this class need to fulfill its behaviors? (In other words, what variables should this class store?)
+
+        What are the data types of these member variables?
+
+            Program Class
+                Attributes:
+                    _userInput: string (selecing variable in while loop for the menu)
+
+            Journal Class
+                Attributes:
+                    _prompt: string (could return a list of prompts, or just one, depending on deisgn)
+                    _entry: string
+                    _saveToFile: entry
+                    _loadEntry: entry
+                    _fileName: string
+
+            Entry Class
+                Attributes
+                    _entry: string
+                    _saveToFile: entry
+                    _loadEntry: entry
+                    _fileName: string
+                    _dateTime: string
+                    _prompt: string
+                    
