@@ -2,7 +2,7 @@ using System;
 
 public class Entry
 {
-    //This will store the combine inputs from the user entry prompts
+    //This will store the combined inputs from the user entry prompts
     public List<string> _entries = new List<string>();
     DateOnly _today = DateOnly.FromDateTime(DateTime.Now);
     
