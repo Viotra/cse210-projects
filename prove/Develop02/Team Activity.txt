@@ -113,3 +113,34 @@ DEFINE CLASS ATTRIBUTES
                     _dateTime: string
                     _prompt: string
                     
+My Program
+
+- Program.cs
+        	-creates a string for a menu prompt option as menuOption
+		-Initializes a new Entry class object as newEntry
+		-Initiates a loop that will quit if the menuOption is ever "5"
+			-Initializes a new Journal class object as journal
+			-Calls the MenuPrompt function from journal and stores its value as 				 menuOption
+			-If the user enters "1", the EntryPrompts function is called from
+			 newEntry. All responses are stored within the class attribute _entries
+			-If the user enters "2", the program will concatenate all entries in the 
+			 _entries list dilineated by a "," and display them to the terminal
+			-If the user enters "3", the SaveEntries method is called from the 				 journal and uses the _entries attribute as an argument
+			-If the user enters "4", the LoadEntries method is called from the 
+			 journal and uses the newEntry object as an argument
+
+	  - Journal.cs
+		-creates a new class called Journal
+			-Attribute: string _ownerName stores the name of the journal owner. 				 Default value is set to "Tim"
+			-Method: string MenuPrompt() displays all the main menu options and
+			 records the user input under a local variable menuOption and returns it
+			-Method: void SaveEntries(List<string> entries) records a file name from 			 the user input then checks if it already exists. If the file does exist, 			 the user can either overwrite the file by typing "yes" or "y", all other 			 entries will exit the method. If the file does not exist, the file will 			 be created and break up the entries list into separate strings before 				 writing them to the file.
+			-Method: void LoadEntries(Entry entry) prompts the user to load a file. 			 If there are entries in the entry._entries, then the user will receive 
+			 a warning that all entries will be deleted upon opening a new file. If
+			 the user enters "yes" or "y", then the entries will be deleted and 				 repopulated with new ones from each line in the opened file. Any other 			 response will exit the method. If there were no entries to begin with, 			 the entries will be populated with each line from the selected file.
+        - Entry.cs
+		-creates a new class called Entry
+			-Attribute: List<string> _entries creates a new list to store all the 				 entries created by the EntryPrompts() method
+			-Attribute: DateOnly _today stores the date to add to each entry
+			-Method: void EntryPrompts() outputs a few short questions for the user 			 to answer about their day then concatenates them with the date from 				 _today and appends those strings to the _entries list
+    

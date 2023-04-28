@@ -2,9 +2,9 @@ using System;
 
 public class Journal
 {
-    public string _ownerName;
+    public string _ownerName = "Tim";
     
-    public string Prompt()
+    public string MenuPrompt()
     {
         string menuOption;
 
@@ -18,6 +18,22 @@ public class Journal
     {
         Console.WriteLine("What would you like to name your file? ");
         string fileName = Console.ReadLine();
+
+        //This block will confirm with user if they wish to overwrite an already existing save file.
+        if (File.Exists(fileName))
+        {
+            Console.Write($"{fileName} already exists. \nWould you like to overwrite saved file? (yes/no) ");
+            string confirm = Console.ReadLine();
+
+            if (confirm == "yes" || confirm == "y")
+            {
+                
+            }
+            else
+            {
+                return;
+            }
+        }
 
         using (StreamWriter saveFile = new StreamWriter (fileName))
         {
@@ -42,9 +58,17 @@ public class Journal
         Console.WriteLine("Which file would you like to load?");
         string fileName = Console.ReadLine();
 
+        //This block will confirm if a user would like to open a new file and delete all current entries.
         if (entry._entries.Count != 0)
         {
-            entry._entries.Clear();
+            Console.WriteLine("Warning, opening a new file will delete all current entries. \nDo you wish to continue? (yes/no) ");
+            string confirm = Console.ReadLine();
+            if (confirm == "yes" || confirm == "y"){
+                entry._entries.Clear();
+            }
+            else{
+                return;
+            }
         }
 
         entry._entries = System.IO.File.ReadAllLines(fileName).ToList();

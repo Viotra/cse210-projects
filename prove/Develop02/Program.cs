@@ -6,31 +6,31 @@ class Program
     {
         //List<string> entries = new List<string>();
         //Console.WriteLine("Hello Develop02 World!");
-        string option = "";
+        string menuOption = "";
         Entry newEntry = new Entry();
 
-        DateTime newDate = DateTime.Now;
+        //DateTime newDate = DateTime.Now;
 
-        while (option != "5"){
+        while (menuOption != "5"){
             Journal journal = new Journal();
-            option = journal.Prompt();
-            //Console.Write(option);
+            menuOption = journal.MenuPrompt();
+            //Console.Write(menuOption);
 
-            if (option == "1")
+            if (menuOption == "1")
             {
                 
                 newEntry.EntryPrompts();
                 
             }
-            else if(option == "2")
+            else if(menuOption == "2")
             {
                 Console.WriteLine(string.Join(',',newEntry._entries));
             }
-            else if(option == "3")
+            else if(menuOption == "3")
             {
                 journal.SaveEntries(newEntry._entries);
             }
-            else if(option == "4")
+            else if(menuOption == "4")
             {
                 journal.LoadEntries(newEntry);
                 
