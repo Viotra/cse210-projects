@@ -19,7 +19,7 @@ class Program
             if (menuOption == "1")
             {
                 
-                newEntry.EntryPrompts();
+                newEntry.EntryMenu();
                 
             }
             else if(menuOption == "2")
