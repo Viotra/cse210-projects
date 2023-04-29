@@ -6,6 +6,7 @@ public class Entry
     public List<string> _entries = new List<string>();
     DateOnly _today = DateOnly.FromDateTime(DateTime.Now);
 
+    //List to hold entry menu options
     List<string> _menu = new List<string>()
         {
             "1. Random prompts",
@@ -13,6 +14,7 @@ public class Entry
             "3. Custom Entry"
         };
     
+    //List of random prompts to meet project requirements
     List<string> _entryPrompts = new List<string>()
     {
         "What is something you accomplished today? ",
@@ -22,6 +24,7 @@ public class Entry
         "Is there anything that you would like future generations to remember? "
     };
 
+    //Allow user to interact with the menu
     public void EntryMenu()
     {
         foreach (string option in _menu)
@@ -45,6 +48,7 @@ public class Entry
         }
     }
 
+    //User can choose how many entries they would like to create and then entries are selected at random
     void AddRandomEntry()
     {
         Console.Write("How many entries would you like to make? ");
@@ -60,6 +64,8 @@ public class Entry
             _entries.Add($"{_today}, {_entryPrompts[randomIndex]}, {entry}");
         }
     }
+
+    //Structured prompts to create an entry using a specific format
     public void AddFormattedEntry()
     {
         Console.WriteLine("Where did you go today? ");
@@ -76,6 +82,7 @@ public class Entry
         _entries.Add($"{_today}, Formatted Entry, I went to {response1} with {response2}. I/We went to {response3}. While I/we were there, {response4}. I felt {response5}.");
     }  
 
+    //Allow user to add what they choose to the journal regardless of prompts
     public void AddCustomEntry()
     {
         Console.WriteLine("Please add your entry: ");
