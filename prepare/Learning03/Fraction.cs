@@ -6,7 +6,7 @@ public class Fraction{
 
     public Fraction()
     {
-        _numerator = 1;
+       _numerator = 1;
        _denominator = 1;
     }
 
