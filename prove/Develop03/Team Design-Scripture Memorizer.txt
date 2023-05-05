@@ -1,0 +1,143 @@
+What does the program do?
+    - removes words to help a user memorize scriptures
+    - Displays the scripture (including reference)
+    - Clear the terminal each time a user enters enter
+    - when "quit" is entered, the program will end
+    - have the user enter a reference (stretch)
+
+ 
+
+What user inputs does it have?
+    - Quit
+    - enter (deletes/omits words from a scripture)
+    - scripture (stretch)
+
+ 
+
+What output does it produce?
+    - scripture (including reference)
+    - scripture with words removed (edited scripture)
+    - instructions
+
+ 
+
+How does the program end?
+    - User enters quit
+
+ 
+
+What are good candidates for classes in this program?
+    - scripture
+    - removing words (word)
+    - reference
+    - program
+
+ 
+
+What are the primary responsibilities of each class?
+    - scripture class
+        - providing a scripture
+        - re-displaying scripture
+        - provide format (text, reference) (optional)
+        - clear screen
+    - Word class
+        - remove words
+    - reference
+        - makes the stretch easier, pulling a scripture from a list/csv file and assign it to a file
+        - initially sets the scripture
+    - program class
+        - call methods from other classes
+
+ 
+
+What are the behaviors this class will have in order to fulfill its responsibilities? (In other words, what things should this class 
+do?)
+    - scripture class
+        Methods:
+            DisplayScripture(): string
+                - Pull the scripture
+                - display the scripture
+            Console.Clear()
+            * While loop to refresh scripture
+                if statement that waits for the user to hit enter, and then will call the remove word method. while should continue unitl the the user hits quit
+
+ 
+
+            Getters and Setters
+                - retrieve private member variables
+                - set values for private member variables
+
+ 
+
+    - Word class
+        Methods:
+            Getter and setter
+                - get scripture
+                - set the edited scripture as the new value
+            SplitScripture(): list of the words in the scripture
+            ReplaceWord(): random generator that uses .replace() to replace random words with _
+            UpdateList(): clear the current scripture list and replace it with the edited version and saves it to a member variable
+
+ 
+
+    - reference class
+        Methods:
+            - get the reference from the user
+            - set the reference to the chosen scripture
+
+ 
+
+What attributes does this class need to fulfill its behaviors? (In other words, what variables should this class store?) What are the data types of these member variables?
+
+ 
+
+    Scripture class
+        _scriptureText: string
+        _reference: Reference
+
+ 
+
+    Word class
+        _scriptureList: List
+        _wordIndex (inside of the ReplaceWord()): int
+
+ 
+
+    reference class
+        _reference: string
+
+What constructors should each class have?
+
+ 
+
+    In other words, what parameters should you pass in when creating an object of that type. What other work needs to be done to 
+    set up these objects? (For example, does the constructor need to run code to perform set up tasks, like creating lists, iterating 
+    through variables, etc.)
+
+ 
+
+        Scripture class
+
+ 
+
+           public Scripture(Reference reference, string word) *string is the scripture text
+
+ 
+
+        Word Class
+
+ 
+
+            public Word()
+
+ 
+
+        Reference Class
+
+ 
+
+            public Reference(string book, string chapter, string verseStart, string verseEnd)
+
+ 
+
+            public Reference(sting book, string chapter, string verse)
