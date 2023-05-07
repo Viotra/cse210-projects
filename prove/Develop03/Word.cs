@@ -2,20 +2,36 @@ using System;
 
 public class Word
 {
-    private List<string> words = new List<string>();
-
-    public Word ()
+    
+    private string _word;
+    private bool _hidden;
+    public Word (string word)
     {
-        
+        _word = word;
+        _hidden = false;
     }
-    public void SeparateWords(Scripture scripture)
+
+    public string GetWord()
     {
-        string[] scriptureWords = scripture.GetScripture().Split(' ');
-        
-        foreach (string word in scriptureWords)
+        return _word;
+    }
+    
+    public bool GetIsHidden()
+    {
+
+        if (_hidden == false)
         {
-            words.Add(word);
+            return false;
         }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void SetIsHidden(bool hidden)
+    {
+        _hidden = hidden;
     }
 
 

@@ -1,21 +1,40 @@
 using System;
 
-public class scriptureReference
+public class ScriptureReference
 {
-    private string _scriputreReference;
+    private string _book, _chapter, _startVerse, _endVerse;
 
-    public void SetScriptureReference(Scripture scripture)
+    public ScriptureReference(string book, string chapter, string verse)
     {
-        _scriputreReference = scripture.CreateReference();
+        _book = book;
+        _chapter = chapter;
+        _startVerse = verse;
+        _endVerse = "";
     }
+
+    public ScriptureReference(string book, string chapter, string startVerse, string endVerse)
+    {
+        _book = book;
+        _chapter = chapter;
+        _startVerse = startVerse;
+        _endVerse = endVerse;
+    }
+    // public void SetScriptureReference(Scripture scripture)
+    // {
+
+    // }
     public string GetScriptureReference()
     {
-        return _scriputreReference;
-    }
+        string _scriputreReference;
 
-    public string CreateReference()
-    {
-        string reference = _book + _chapter + _verse;
-        return reference;
+        if (_endVerse == "")
+        {
+            _scriputreReference = $"{_book} {_chapter}:{_startVerse}";
+        }
+        else
+        {
+            _scriputreReference = $"{_book} {_chapter}:{_startVerse}-{_endVerse}";
+        }
+        return _scriputreReference;
     }
 }

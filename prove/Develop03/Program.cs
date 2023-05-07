@@ -5,7 +5,26 @@ class Program
 {
     static void Main(string[] args)
     {
-        Scripture scripture = new Scripture("James", "4", "12", "Whosoever shall break these laws shall find no place in the kingdom of God.");
-        scripture.ReadScripture();
+        CsvToDictionary bible = new CsvToDictionary();
+        var bibleElements = bible.GetScriptureReference();
+
+        ScriptureReference reference = new ScriptureReference (bibleElements.Item1, bibleElements.Item2, bibleElements.Item3);
+        Scripture scripture = new Scripture(reference.GetScriptureReference(), bible.GetScripture());
+        
+        string userEntry = "nothing";
+
+        while (userEntry != "quit" && scripture.AllHidden() == false)
+        {
+            if (userEntry == "")
+            {
+                scripture.HideWord();
+            }
+
+            Console.Clear();
+            scripture.ReadScripture();
+            userEntry = Console.ReadLine();
+        }
+        
+        Console.ReadLine();
     }
 }
