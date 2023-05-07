@@ -24,7 +24,5 @@ class Program
             scripture.ReadScripture();
             userEntry = Console.ReadLine();
         }
-        
-        Console.ReadLine();
     }
 }

@@ -5,10 +5,7 @@ using System.Collections.Generic;
 public class Scripture
 {
     private string _reference;
-    private string _scripture;
-
     private List<Word> _words = new List<Word>();
-
     private List<int> indeces = new List<int>();
     private List <string> subs = new List<string>();
 
@@ -22,16 +19,12 @@ public class Scripture
         
     }
 
-    //This constructor will have a specific scripture to reference
-    // public Scripture(Dictionary<string, string> userScripture)
-    // {
-    
-    // }
-    public void splitVerse(string scripture)
+    //This method breaks the verse down into just words and passed into new Word objects then added to a list.
+    //Symbols are removed and stored in their own list to add back later
+    private void splitVerse(string scripture)
     {
 
         List<string> _brokenVerse = scripture.Split(' ').ToList();
-
         int indexInString = 0;
 
         foreach (string piece in _brokenVerse)
@@ -40,6 +33,8 @@ public class Scripture
         int indexInWord = 0;
         string wordText = piece;
 
+        //This is where we remove the symbols and store them. Done by checking if each character in
+        //a word is punctuation.
         foreach (char letter in piece)
         {
            
@@ -61,8 +56,8 @@ public class Scripture
                 }
                 
             }
+            
             indexInWord ++;
-
             
         }
 
@@ -73,6 +68,7 @@ public class Scripture
         }
     }
 
+    //Adds all _word values from Word objects to a list along with symbols to be added together on screen.
     public void ReadScripture()
     {
         Console.WriteLine(_reference);
@@ -82,6 +78,10 @@ public class Scripture
         int wordIndex = 0;
         int itemIndex = 0;
 
+        //This took way too much time to figure out. But this counts words to verify which
+        //originally had a symbol attached, then uses the itemIndex to match the word with
+        //the appropriate symbol. wordIndex and itemIndex are updated upon adding a symbol.
+        
         foreach (Word word in _words)
         {
             string punctuation = "";
@@ -110,12 +110,6 @@ public class Scripture
         Console.WriteLine(scripture);
     }
     
-
-    public string GetScripture()
-    {
-        return _scripture;
-    }
-
     public Word GetRandomWord()
     {
         Random random = new Random();

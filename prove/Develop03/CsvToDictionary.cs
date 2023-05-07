@@ -7,9 +7,10 @@ public class CsvToDictionary
     private string _book;
     private string _chapter;
     private string _startVerse;
-    private string _endVerse;
+    private string _endVerse; //Never utitlized. Ran out of time to use item.
     private string _scripture;
 
+    //Constructor assigns values to all attributes in class using a line from the referenced csv file.
     public CsvToDictionary()
     {
         List<string> bibleElements = GetRandomScripture();
@@ -19,11 +20,13 @@ public class CsvToDictionary
         _startVerse = bibleElements[4];
         _scripture = bibleElements[6];
     }
-    public List<string> GetRandomScripture()
+
+    //grabs a line at random from the bible list and breaks up line to pass individual values to constructor.
+    private List<string> GetRandomScripture()
     {
         Random random = new Random();
         int randomIndex = random.Next(bible.Count);
-        string randomVerse = bible[randomIndex];
+        string randomVerse = bible[0];
 
         List<string> bibleElements;
 
@@ -41,12 +44,14 @@ public class CsvToDictionary
         return bibleElements;
     }
 
+    //returns a tuple to be used by ScriptureReference class to build reference.
     public (string, string, string) GetScriptureReference()
     {
         
         return (_book, _chapter, _startVerse);
     }
 
+    //just returns the random scripture text
     public string GetScripture()
     {
         return _scripture;
