@@ -18,7 +18,14 @@ public class CsvToDictionary
         _book = bibleElements[1];
         _chapter = bibleElements[3];
         _startVerse = bibleElements[4];
-        _scripture = bibleElements[6];
+        if (bibleElements[5] == "")
+        {
+            _scripture = bibleElements[6];
+        }
+        else
+        {
+            _scripture = bibleElements[5];
+        }
     }
 
     //grabs a line at random from the bible list and breaks up line to pass individual values to constructor.
@@ -26,7 +33,7 @@ public class CsvToDictionary
     {
         Random random = new Random();
         int randomIndex = random.Next(bible.Count);
-        string randomVerse = bible[0];
+        string randomVerse = bible[randomIndex];
 
         List<string> bibleElements;
 
