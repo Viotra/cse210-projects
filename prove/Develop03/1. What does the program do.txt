@@ -1,0 +1,30 @@
+1. What does the program do:
+	- Helps user relax and become more mindful through 3 different activities, breathing, reflection and listing.
+2. What user inputs does it have?
+	- Menu options for activities or to quit
+	- reflection prompts
+	- listing input
+3. What output does it produce
+	- Menu
+	- Standard start/end messages
+	- Activity description
+	- Prompts for each activity
+	- Counters and spinners
+4. How does the program end?
+	- User selects to quit
+5. What are good candidates for classes in this program?
+	-Activity (base class)
+	-BreathingActivity
+	-ReflectionActivity
+	-ListingActivity
+6. What are the primary responsibilities of each class?
+	-Activity
+		-Start/End messages
+		-Store timers?
+7. What are the behaviors this class will have in order to fulfill its responsibilities? (In other words, what things should this class do?)
+
+8. What attributes does this class need to fulfill its behaviors? (In other words, what variables should this class store?)
+
+9. What are the data types of these member variables?
+
+10. What constructors should each class have?
