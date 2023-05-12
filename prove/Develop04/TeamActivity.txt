@@ -1,0 +1,207 @@
+What does the program do?
+
+    Takes the user through activities designed to improve mental health
+
+    Improves mindfullness
+
+ 
+
+What user inputs does it have?
+
+    Menu(activiies)
+
+    Text inputs from reflection activity and listing activity
+
+    Lengths of time
+
+
+What output does it produce?
+
+    Prompts(Listing and reflection)
+
+    Spinners and Timers
+
+    Activity Instructions
+
+    Start and End messages
+
+ 
+
+How does the program end?
+
+    User enters "quit" from the Menu
+
+ 
+
+What are good candidates for classes in this program?
+
+    Activity 
+
+        Refelction Activity
+
+        Listing Activity
+
+        Breathing Activity
+
+    Animations
+
+    Menu?
+
+ 
+
+What are the primary responsibilities of each class?
+
+   Activity: Instructions, welcome, end, and name 
+
+        Refelction Activity : provide refelction prompts, accepts user inputs, but doesn't "save" them
+
+        Listing Activity : Provide Listing prompts, accepts user inputs but doesn't "save" them
+
+        Breathing Activity : provide timed breath prompts
+
+    Animations : Spinners, countdowns and timers
+
+ 
+
+What are the behaviors this class will have in order to fulfill its responsibilities? (In other words, what things should this class do?)
+
+    Activity
+
+        GetStart()
+
+        GetEnd()
+
+ 
+
+    Reflection
+
+        GetDescription()
+
+        GetPrompt()
+
+ 
+
+    Listing
+
+        GetDescription()
+
+        GetPrompt()
+
+ 
+
+    Breathing
+
+        GetDescription()
+
+        GetInstructions()
+
+ 
+
+    Animations
+
+        CountdownTimer() -> includes spinner/animation
+
+ 
+
+What attributes does this class need to fulfill its behaviors? (In other words, what variables should this class store?)
+
+    Activity
+
+        _activityName: string
+
+        _duration: int
+
+        _startMsg: string
+
+        _endMsg: string
+
+        _description: string
+
+        _instructions: string
+
+ 
+
+    Reflection
+
+        _prompts: List<string>
+
+        _questions: List<string>
+
+ 
+
+    Listing
+
+        _prompts: List<string>
+
+ 
+
+    Breathing
+
+        none
+
+ 
+
+    Animations
+
+        _animationList: List<string>
+
+        _animationDuration: int
+
+ 
+
+What constructors should each class have?
+
+ 
+
+    In other words, what parameters should you pass in when creating an object of that type.
+
+        Activity
+
+            Activity(name, description, duration, instructions)
+
+ 
+
+        Reflection
+
+            Reflection() : base(name, description, duration, instructions) *in the base(), you could fill in the variables with their values
+
+ 
+
+        Listing
+
+            Listing() : base(name, description, duration, instructions)
+
+ 
+
+        Breathing
+
+            Breathing() : base(name, description, duration, instructions)
+
+ 
+
+        Animations
+
+            Animations(duration)
+
+
+ 
+
+What other work needs to be done to set up these objects?
+
+ 
+
+    For example, does the constructor need to run code to perform set up tasks, like creating lists, iterating through variables, etc.
+
+ 
+
+    Nothing
+
+
+
+
+ like 1
+
+
+
+
+

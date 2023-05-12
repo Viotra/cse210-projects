@@ -1,7 +1,7 @@
 class Animations{
     int duration;
 
-    private List<string> animations = new List<string>()
+    private List<string> _blinkAnimations = new List<string>()
         {
             "-_-",
             "▬_▬",
@@ -18,6 +18,11 @@ class Animations{
 
     public void RunBlinkAnimation()
     {
-
+        foreach (string animation in _blinkAnimations)
+        {
+            Console.Write(animation);
+            Thread.Sleep(350);
+            Console.Write("\r" + new string(' ', Console.WindowWidth - 1) + "\r");
+        }
     }
 }
