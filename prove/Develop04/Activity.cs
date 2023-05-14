@@ -2,32 +2,39 @@ class Activity
 {
     protected string _activityName;
     private string _startingMessage = "Now beginning ";
-    protected string _endingMessage = "Well done.";
-    protected string instuctions;
+    private string _endingMessage = "Well done.";
+    protected string _instructions;
 
-    protected int duration;
+    private int _duration;
 
     public int GetDuration()
     {
-        return duration;
+        Console.Write("How many minutes would you like to spend performing this activity? ");
+        _duration = int.Parse(Console.ReadLine());
+        return _duration;
     }
 
     public Activity(string name)
     {
         _activityName = name;
     }
-    public void Spinner()
-    {
-
-    }
-
-    public void CountdownTimer()
-    {
-
-    }
 
     protected string StartingMessage
     {
         get{return _startingMessage + _activityName;}
+    }
+
+    protected void WriteEndMessage()
+    {
+        Console.Write(_endingMessage);
+    }
+
+    public void StartActivity()
+    {
+        Console.Clear();   
+        Console.WriteLine(StartingMessage);
+        Thread.Sleep(3000);
+        Console.WriteLine(_instructions);
+        Thread.Sleep(3000);
     }
 }

@@ -15,6 +15,8 @@ class Menu
         while (userInput != "4" && userInput != "quit")
         {
 
+            Console.Clear();
+
             foreach (string item in _menuItems)
             {
                 Console.WriteLine(item);
@@ -22,18 +24,27 @@ class Menu
 
             userInput = Console.ReadLine().ToLower();
 
-            Console.WriteLine(userInput);
-            Console.ReadLine();
+            Animations animation = new Animations();
 
             switch(userInput)
             {
                 case "1":
                 case "breathing activity":
+                    animation.RunBlinkAnimation();
                     Breathing breathing = new Breathing();
+                    breathing.RunBreathingActivity();
                     break;
                 case "2":
                 case "reflection activity":
+                    animation.RunBlinkAnimation();
                     Reflection reflection = new Reflection();
+                    reflection.ReflectionActivity();
+                    break;
+                case "3":
+                case "listing activity":
+                    animation.RunBlinkAnimation();
+                    Listing listing = new Listing();
+                    listing.RunListingActivity();
                     break;
             }
         }
