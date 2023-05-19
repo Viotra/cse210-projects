@@ -49,13 +49,13 @@ class Program
                             break;
                         case "2":
                             //Eternal Goal
-                            Eternal eternal = new Eternal();
+                            EternalGoal eternal = new EternalGoal();
                             eternal.Test(2);
                             break;
                         case "3":
                             //Checklist Goal
 
-                            Checklist checklist = new Checklist();
+                            ChecklistGoal checklist = new ChecklistGoal();
                             checklist.Test(3);
                             break;
                     }

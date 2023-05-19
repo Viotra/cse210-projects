@@ -1,4 +1,4 @@
-class Checklist : Goal
+class ChecklistGoal : Goal
 {
     public ChecklistGoal()
         : base ()
