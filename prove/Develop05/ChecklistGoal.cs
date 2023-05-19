@@ -1,6 +1,6 @@
-class Eternal : Goal
+class Checklist : Goal
 {
-    public Eternal()
+    public ChecklistGoal()
         : base ()
         {
 
