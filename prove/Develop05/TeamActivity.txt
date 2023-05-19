@@ -1,0 +1,182 @@
+What does the program do?
+    Allows the user to create goals and work towards them in a fun, game driven way
+
+ 
+
+What user inputs does it have?
+    goals, goal progress, goal type, and point value
+
+ 
+
+What output does it produce?
+    goals, goal status, points, menu
+
+ 
+
+How does the program end?
+    When user says quit
+
+ 
+
+What are good candidates for classes in this program?
+    Goal(Eternal Goal, Checklist Goal, and Simple Goal)
+    Load 
+    Save
+    Points(optional)
+
+ 
+
+What are the primary responsibilities of each class?
+    Goal - Base, sets up other goals
+    Eternal Goal - Build and process an Eternal Goal (Never completed)
+    Checklist Goal - Build and process a checklist goal (multiple check-offs)
+    Simple Goal - Build and process a simple goal (One-time check-off)
+    Load - Read a file and store it to a list for display
+    Save - Read a list and store it to file
+    Points - Calculates and stores points
+
+ 
+
+What are the behaviors this class will have in order to fulfill its responsibilities? (In other words, what things should this class do?)
+    Goal - 
+        GetGoal(): abstract string
+        IsComplete(bool): will set the accomplished to True
+        RecordEvent(): abstract
+
+ 
+
+    Eternal Goal - 
+        RecordEvent(): override
+        GetGoal(): override
+
+ 
+
+    Checklist Goal - 
+        RecordEvent(): override
+        GetGoal(): override
+
+ 
+
+    Simple Goal - 
+        RecordEvent(): override
+        GetGoal(): override
+
+ 
+
+    Load - 
+        LoadFile(): list of goals
+        GetFile(): string (retreives file name from user)
+
+ 
+
+    Save - 
+        SaveFile(): void (takes list of goals and writes it to file)
+
+ 
+
+    Points - 
+        GetPoints(): retreives point value
+        CalculatePoints(goal.RecordEvent): sets point value
+
+ 
+
+What attributes does this class need to fulfill its behaviors? (In other words, what variables should this class store?)
+    Goal - 
+        _name: string
+        _description: string
+        _pointAmount: int
+        _complete: bool
+
+ 
+
+    Eternal Goal - 
+        inherited:
+            _name: string
+            _description: string
+            _pointAmount: int
+            _complete: bool -> won't change
+
+ 
+
+    Checklist Goal - 
+        inherited:
+            _name: string
+            _description: string
+            _pointAmount: int
+            _complete: bool
+        Personal:
+            _times: int
+
+ 
+
+    Simple Goal - 
+        inherited:
+            _name: string
+            _description: string
+            _pointAmount: int
+            _complete: bool
+
+ 
+
+    Load - 
+        _fileName: string
+
+ 
+
+    Save - 
+        _fileName: string
+
+ 
+
+    Points - 
+        _points: List<int>
+        _bonusPoints: int (optional, could be taken care of by the RecordEvent())
+        _pointTotal: int
+
+ 
+
+What constructors should each class have?
+    Goal - 
+        public Goal(string name, string description, int pointAmount,)
+
+ 
+
+    Eternal Goal - 
+        Base
+
+ 
+
+    Checklist Goal - 
+        public Checklist(string name, string description, int pointAmount, int times) : base(name, description, pointAmount)
+
+ 
+
+    Simple Goal - 
+        Base
+
+ 
+
+    Load - 
+        public Load(string fileName)
+
+ 
+
+    Save - 
+        public Save(string fileName)
+
+ 
+
+    Points - 
+        public Points()
+
+ 
+
+What other work needs to be done to set up these objects?
+
+ 
+
+For example, does the constructor need to run code to perform set up tasks, like creating lists, iterating through variables, etc.
+    - Constructors need to build objects and set values
+    - Complete needs to be automatically set to false when we build a new goal
+    - RecordEvent() will need to increase _times by one for the Checklist goal
+    - Load and Save classes will need to create, access and edit files
