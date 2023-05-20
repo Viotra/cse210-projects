@@ -2,45 +2,47 @@ public abstract class Goal
 {
     //Goals will be simple, Eternal, or checklist
 
-    private string _name, _description, _points;
+    private string _name, _description;
+    private int _points;
     private bool _accomplished;
     private List<string> goals = new List<string>();
 
     public Goal()
     {
-        var newGoal = CreateNewGoal();
-        string name = newGoal.Item1;
-        string description = newGoal.Item2;
-        string points = newGoal.Item3;
+        CreateNewGoal();
+        SetAccomplished(false);
+    }
 
+    public Goal(string name, string description, int points, bool accomplished)
+    {
         _name = name;
         _description = description;
         _points = points;
-        _accomplished = false;
+        SetAccomplished(accomplished);
+
     }
 
-    public abstract string GetGoal();
+    public (string, string, int, bool) GetGoal()
+    {        
+        return (_name,_description,_points, _accomplished);
+    }
 
-    public void Test(int number)
+    public virtual int RecordEvent()
     {
-        Console.WriteLine($"Test {number.ToString()} successful!");
+        return _points;
     }
     protected void SetAccomplished(bool accomplished)
     {
         _accomplished = accomplished;
     }
 
-    private (string, string, string) CreateNewGoal()
+    private void CreateNewGoal()
     {
-        string name, description, points;
-
         Console.Write("What is the name of this goal? ");
-        name = Console.ReadLine();
+        _name = Console.ReadLine();
         Console.Write("What is the purpose of this goal? ");
-        description = Console.ReadLine();
+        _description = Console.ReadLine();
         Console.Write("How many points would you like to assign to this goal? ");
-        points = Console.ReadLine();
-
-        return (name, description, points);
+        _points = int.Parse(Console.ReadLine());
     }
 }

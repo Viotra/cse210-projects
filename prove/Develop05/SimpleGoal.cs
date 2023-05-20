@@ -1,13 +1,20 @@
 class SimpleGoal : Goal
 {
+    const int _goalType = 1;
     public SimpleGoal()
         : base ()
+        {
+            SetAccomplished(false);
+        }
+    public SimpleGoal(string name, string description, int points, bool accomplished)
+        :base(name, description, points, accomplished)
         {
 
         }
 
-    public override string GetGoal()
+    public override int RecordEvent()
     {
-        return "";
+        SetAccomplished(true);
+        return base.RecordEvent();
     }
 }
