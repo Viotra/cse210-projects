@@ -22,9 +22,9 @@ public abstract class Goal
 
     }
 
-    public (string, string, int, bool) GetGoal()
+    public virtual string GetGoal()
     {        
-        return (_name,_description,_points, _accomplished);
+        return string.Format("{0}|{1}|{2}|{3}",_name,_description,_points, _accomplished);
     }
 
     public virtual int RecordEvent()

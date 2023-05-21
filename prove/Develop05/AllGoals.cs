@@ -23,11 +23,17 @@ class AllGoals
     {
         for(int i = 0; i < _goals.Count; i++)
         {
-            var goalElements = _goals[i].GetGoal();
-            string name = goalElements.Item1;
-            string description = goalElements.Item2;
-            bool accomplished = goalElements.Item4;
-            Console.WriteLine(string.Format("{3}. Name: {0} Description: {1} Completed: {2}", name, description, accomplished, i));
+            string statusSymbol = "[ ]";
+            string goal = _goals[i].GetGoal();
+            string[] goalElements = goal.Split("|");
+            string name = goalElements[0];
+            string description = goalElements[1];
+            bool accomplished = Boolean.Parse(goalElements[3]);
+            if (accomplished == true)
+            {
+                statusSymbol = "[x]";
+            }
+            Console.WriteLine(string.Format("#{3} {4} Name: {0} Description: {1} Completed: {2}", name, description, accomplished, i, statusSymbol));
         }
     }
 }

@@ -17,4 +17,8 @@ class SimpleGoal : Goal
         SetAccomplished(true);
         return base.RecordEvent();
     }
+    public override string GetGoal()
+    {
+        return base.GetGoal() + string.Format("{0}", _goalType);
+    }
 }
