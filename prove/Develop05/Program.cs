@@ -8,13 +8,18 @@ class Program
         SaveLoadCSV saveLoad = new SaveLoadCSV();
         Menu menu = new Menu();
         List<string> mainMenu = menu.GetMainMenu();
+
+        Animations animations = new Animations();
+        
  
         string userInput = "";
 
         while (userInput != "6" && userInput != "quit")
         {
+            int score = allGoals.GetScore();
             Console.Clear();
-            Console.WriteLine(allGoals.GetScore());
+            animations.Spinner();
+            Console.WriteLine(score);
             Console.WriteLine();
             Console.WriteLine("Menu Options:");
 
@@ -32,6 +37,7 @@ class Program
 
                     List<string> goalMenu = menu.GetGoalMenu();
                     Console.Clear();
+                    animations.Spinner();
                     Console.WriteLine("Choose from one of the following goals:");
 
                     foreach (string option in goalMenu)
@@ -65,33 +71,41 @@ class Program
                 case "2":
                 case "list goals":
                     Console.Clear();
+                    animations.Spinner();
                     allGoals.DisplayGoals();
                     Console.ReadKey();
                     break;
                 case "3":
                 case "save goals":
                     Console.Clear();
+                    animations.Spinner();
                     List<string> sGoals = new List<string>();
                     foreach(Goal aGoal in allGoals.GetGoalList())
                     {
                         sGoals.Add(aGoal.GetGoal());
                     }
-                    saveLoad.SaveGoalsFile(sGoals);
+                    saveLoad.SaveGoalsFile(sGoals, score);
                     break;
                 case "4":
                 case "load goals":
                     Console.Clear();
-                    saveLoad.LoadGoalFile(allGoals.GetGoalList());
+                    animations.Spinner();
+                    saveLoad.LoadGoalFile(allGoals);
                     break;
                 case "5":
                 case "record event":
                     Console.Clear();
+                    animations.Spinner();
                     Console.Write("For which goal would you like to record an event? ");
                     allGoals.DisplayGoals();
                     int newUserInput = int.Parse(Console.ReadLine()) - 1; 
                     Goal goal = allGoals.GetGoal(newUserInput);
                     Console.WriteLine(goal.GetType());
                     allGoals.UpdateScore(goal.RecordEvent());
+                    // if (goal.IsAccomplished() == true)
+                    // {
+                        
+                    // }
                     break;
                 // case "6":
                 // case "quit":

@@ -25,7 +25,9 @@ class EternalGoal : Goal
         _timesCompleted++;
         if (_timesCompleted % 5 == 0)
         {
-            return base.RecordEvent() + _timesCompleted;
+            Animations animations = new Animations();
+            int bonusPoints = animations.BonusPoints();
+            return bonusPoints;
         }
         else
         {

@@ -1,3 +1,4 @@
-Test|Test|10|False|1
-Test 2|just a test|25|False|2|0
-Test 3|another test|27|False|3|0|2|56
+62
+Test|Test|10|True|1
+Test 2|just a test|25|False|2|1
+Test 3|another test|27|False|3|1|2|56

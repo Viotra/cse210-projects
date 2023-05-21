@@ -30,7 +30,9 @@ class ChecklistGoal : Goal
         if (_timesCompleted == _timesToComplete)
         {
             SetAccomplished(true);
-            return base.RecordEvent() + _bonusPoints;
+            Animations animations = new Animations();
+            int bonusPoints = animations.BonusPoints();
+            return bonusPoints;
         }
         return base.RecordEvent();
     }

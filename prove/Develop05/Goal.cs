@@ -35,6 +35,10 @@ public abstract class Goal
     {
         _accomplished = accomplished;
     }
+    public bool IsAccomplished()
+    {
+        return _accomplished;
+    }
 
     private void CreateNewGoal()
     {
