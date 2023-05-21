@@ -1,3 +1,4 @@
+//Added Animations class for spinner and Bonus Points animation
 using System;
 
 class Program
