@@ -70,6 +70,7 @@ class Program
                     break;
                 case "3":
                 case "save goals":
+                    Console.Clear();
                     List<string> sGoals = new List<string>();
                     foreach(Goal aGoal in allGoals.GetGoalList())
                     {
@@ -79,6 +80,7 @@ class Program
                     break;
                 case "4":
                 case "load goals":
+                    Console.Clear();
                     saveLoad.LoadGoalFile(allGoals.GetGoalList());
                     break;
                 case "5":
