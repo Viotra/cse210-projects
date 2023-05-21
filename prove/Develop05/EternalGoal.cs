@@ -17,11 +17,12 @@ class EternalGoal : Goal
 
     public override string GetGoal()
     {
-        return base.GetGoal() + string.Format("{0}|{1}", _goalType, _timesCompleted);
+        return base.GetGoal() + string.Format("|{0}|{1}", _goalType, _timesCompleted);
     }
 
     public override int RecordEvent()
     {
+        _timesCompleted++;
         if (_timesCompleted % 5 == 0)
         {
             return base.RecordEvent() + _timesCompleted;
@@ -30,5 +31,9 @@ class EternalGoal : Goal
         {
             return base.RecordEvent();
         }
+    }
+    public override int GetGoalType()
+    {
+        return _goalType;
     }
 }

@@ -19,6 +19,10 @@ class SimpleGoal : Goal
     }
     public override string GetGoal()
     {
-        return base.GetGoal() + string.Format("{0}", _goalType);
+        return base.GetGoal() + string.Format("|{0}", _goalType);
+    }
+    public override int GetGoalType()
+    {
+        return _goalType;
     }
 }

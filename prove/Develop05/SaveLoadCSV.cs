@@ -10,27 +10,65 @@ class SaveLoadCSV
     {
         
     }
-    public void LoadGoalFile(int goalType, List<Goal> goalsList)
+    public void LoadGoalFile(List<Goal> allGoals)
     {
         Console.WriteLine("Which file would you like to load?");
         string fileName = Console.ReadLine();
 
         //This block will confirm if a user would like to open a new file and delete all current entries.
-        if (goalsList.Count != 0)
+        if (allGoals.Count != 0)
         {
             Console.WriteLine("Warning, opening a new file will delete all current entries. \nDo you wish to continue? (yes/no) ");
             string confirm = Console.ReadLine();
-            if (confirm == "yes" || confirm == "y"){
-                goalsList.Clear();
+            if (confirm == "yes" || confirm == "y")
+            {
+                allGoals.Clear();
+            }
+            else
+            {
+                return;
             }
         }
 
         List<string> goalFile = System.IO.File.ReadAllLines(fileName).ToList();
+        foreach (string goal in goalFile)
+        {   
+            string[] goalElements = goal.Split("|");
+            string name = goalElements[0];
+            string description = goalElements[1];
+            int points = int.Parse(goalElements[2]);
+            bool accomplished = Boolean.Parse(goalElements[3]);
+            int goalType = int.Parse(goalElements[4]);
+            int timesCompleted;
+            int timesToComplete;
+            int bonusPoints;
+
+            switch(goalType)
+            {
+                case 1:
+                    SimpleGoal simple = new SimpleGoal(name, description, points, accomplished);
+                    allGoals.Add(simple);
+                    break;
+                case 2:
+                    timesCompleted = int.Parse(goalElements[5]);
+                    EternalGoal eternal = new EternalGoal(name, description, points, timesCompleted);
+                    allGoals.Add(eternal);
+                    break;
+                case 3:
+                    timesCompleted = int.Parse(goalElements[5]);
+                    timesToComplete = int.Parse(goalElements[6]);
+                    bonusPoints = int.Parse(goalElements[7]);
+                    ChecklistGoal checklist = new ChecklistGoal(name, description, points, accomplished,
+                        timesToComplete, timesCompleted, bonusPoints);
+                    allGoals.Add(checklist);
+                    break;
+            }
+        }
         Console.Write("Your file has loaded.");
         Console.ReadLine();
     }
     //Need to alter SaveEntries class for Type Goal
-    public void SaveEntries(List<Goal> allGoals)
+    public void SaveGoalsFile(List<string> allGoalsList)
     {
         Console.WriteLine("What would you like to name your file? ");
         string fileName = Console.ReadLine();
@@ -53,9 +91,9 @@ class SaveLoadCSV
 
         using (StreamWriter saveFile = new StreamWriter (fileName))
         {
-            foreach (Goal goal in allGoals)
+            foreach (string goal in allGoalsList)
             {
-                saveFile.WriteLine(goal.GetGoal());
+                saveFile.WriteLine(goal);
             }
         }
     }

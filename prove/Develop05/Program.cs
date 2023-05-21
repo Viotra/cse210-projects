@@ -5,7 +5,7 @@ class Program
     static void Main(string[] args)
     {
         AllGoals allGoals = new AllGoals();
-
+        SaveLoadCSV saveLoad = new SaveLoadCSV();
         Menu menu = new Menu();
         List<string> mainMenu = menu.GetMainMenu();
  
@@ -70,22 +70,25 @@ class Program
                     break;
                 case "3":
                 case "save goals":
+                    List<string> sGoals = new List<string>();
+                    foreach(Goal aGoal in allGoals.GetGoalList())
+                    {
+                        sGoals.Add(aGoal.GetGoal());
+                    }
+                    saveLoad.SaveGoalsFile(sGoals);
                     break;
                 case "4":
                 case "load goals":
+                    saveLoad.LoadGoalFile(allGoals.GetGoalList());
                     break;
                 case "5":
                 case "record event":
+                    Console.Clear();
                     Console.Write("For which goal would you like to record an event? ");
                     allGoals.DisplayGoals();
-                    int newUserInput = int.Parse(Console.ReadLine()); 
+                    int newUserInput = int.Parse(Console.ReadLine()) - 1; 
                     Goal goal = allGoals.GetGoal(newUserInput);
                     Console.WriteLine(goal.GetType());
-                    if (goal.GetType().Equals(typeof(SimpleGoal)))
-                        {
-                            Console.WriteLine(true);
-                        }
-                    Console.ReadKey();
                     allGoals.UpdateScore(goal.RecordEvent());
                     break;
                 // case "6":

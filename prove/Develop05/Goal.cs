@@ -45,4 +45,5 @@ public abstract class Goal
         Console.Write("How many points would you like to assign to this goal? ");
         _points = int.Parse(Console.ReadLine());
     }
+    public abstract int GetGoalType();
 }
