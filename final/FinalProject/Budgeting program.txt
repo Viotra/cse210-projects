@@ -1,0 +1,111 @@
+Budgeting program
+
+It always seems difficult to come up with a budget. It would be nice if there was something that would allow me to put all of my expenses into and have it calculate how much I should be spending. The budget program should be able to not only take in what my money is going toward, but help me to categorize each item into areas such as bills, tithing, entertainment, groceries, etc. After items have been categorized and priced, I should be able to put in my total monthly income to show how much money is coming in vs out and show what percentage of my money is being used in each category. From there, I should be able to create a limit for each of the items on my list and attempt to zero my balance. Once the budget is set, I should be able to track all of my spending going forward to see how closely I am following my budget. The program should be able to warn me if I'm spending too much or even getting close to hitting my limits in each category. Once I have filled up the program with 30 days worth of information, it should give me a way to view the results of my month in order to review and better my budget/spending.
+
+Classes:
+
+Super class Payments - Sub classes (Mortgage, Phone, Internet, ~tithing 10%, Insurance, Groceries, Gas, Electric, Entertainment) (may split up into separate Super classes due to amount of sub classes.)
+
+Menu - Will contain information on if I want to create a budget, review/adjust a budget, account for if I kept to the budget.
+
+SaveLoadBudget - This will allow the user to store their budget goals and load them to view at anytime.
+
+Transactions - in charge of keeping track of the information coming in and out and allows the transactions to be catagorized as income, Mortgage, Phone Payment, Internet Payment, Gas Payment, Electric Payment, Water Payment, Entertainment Payment, Insurance Payment, Tithing Payment
+
+Budget - The budget should take in all Payment information along with being able to calculate the percentage of money spent for each category and allow the user to make goals for spending limits for each catagory.
+
+Attributes:
+
+Payments - _paymentType, _monthlyPayment, _percentageOfIncome, _spendingLimit, _isFixedPayment
+
+Mortgage - _interestRate, _principalAmount, _numberOfPayments, _extraToPrincipal, _payOffDate
+
+Phone - _additionalFees
+
+Internet - _additionalFees
+
+Insurance - n/a?
+
+Tithing - _isPaid
+
+Groceries - _foods, _toiletries, miscellaneous, _frequency
+
+Fuel - _frequency, _averagePriceOfFuel
+
+Gas - n/a
+
+Electric - n/a
+
+Water - n/a
+
+Entertainment - _itemsPurchased, _purchaseAmounts, _necessities (May need to make separate class to hold information or create a dictionary)
+
+Menu - _mainMenu, _paymentMenu, _budgetMenu
+
+SaveLoadBudget - n/a
+
+Transactions - _paymentTypes, _netIncome, _totalMonthlySpending, _isExpense
+
+Budget - _allPayments, _unnecessaryExpenses, _keptBudget, _savingsGoal, _leftOverFunds
+
+Methods:
+
+Payments - SetMonthlyPayment(), GetMonthlyPayment(), CalculatePercentageOfIncome(), GetPercentageOfIncome(), SetSpendingLimit, GetSpendingLimit, SetFixedPayment(), GetFixedPayment()
+
+Mortgage - CalculateAmountToPrincipal(), CalculateAmountToInterest(), SetPrincipal() (incase of error), DisplayAmoritzationTable(), SetAdditionalToPrincipal(), CalculatePayoffDate(), GetPayoffDate(), override SetMonthlyPayment()
+
+Phone - SetAdditionalFees(), override SetMonthlyPayment()
+
+Internet - SetAdditionalFees(), override SetMonthlyPayment()
+
+Insurance - SetAdditionalFees(), override SetMonthlyPayment() (could also ask if insurance rate increased due to a claim)
+
+Tithing - CalculateTenPercent(), SetPaid(), override SetMonthlyPayment()
+
+Groceries - AddFoodExpense(), AddToiletryExpense(), AddMiscellaneous(), SetFrequency(), override SetMonthlyPayment()
+
+Gas - CalculateAveragePayment()
+
+Electric - CalculateAveragePayment()
+
+Water - CalculateAveragePayment()
+
+Entertainment - override SetMonthlyPayment(), SetNecessities(), SetPurchaseAmount()
+
+SaveLoadBudget - SaveFile(), LoadFile()
+
+Transactions - GetPaymentTypes(), SetNetIncome(), GetNetIncome(), DisplayTotalMonthlySpening(), GetIsExpense()
+
+Budget - SetKeptBudget(), SetSavingsGoal(), GetSavingsGoal(), SetBudgetReviewDate()
+
+Explicit Constructors:
+
+Payment (and all Sub classes) - (bool isFixedPayment)
+
+Mortgage - inside constructor should request and set: principal, interest, number of payments (will be used to show benefit of paying of loan quicker to consider in budget)
+
+Phone, Internet & Insurance - Should ask if there were additional fees and set additional fees
+
+Tithing - (int monthlyIncome) should use monthlyIncome argument to SetTenPercent
+
+Groceries - unsure
+
+Gas, Water & Electric - should ask for how many past payments and then take in each payment to calculate the average and SetMonthlyPayment using that information. Could just override SetMonthlyPayment()?
+
+Entertainment - should request and set purchase amounts for multiple items and ask if item was a necessity
+
+Budget - will need empty constructor and (List<Payments> allPayments) for loading files
+
+Transactions - will need empty constructor and (List<string> transactions) for loading files
+
+Relation - 
+
+The Budget & Transactions should be initialized in the main program. Upon initialzing a Budget, it should check if there is already a review date, and if there is, verify if the Budget was kept. The Menu should then display asking if the user would like to Create a New Budget and run them through if they have a payment for each category and then run through all pertaining payments, running through any unique payment scenarios (such as verifying if the user would like to pay more money to to principla on their Mortgage) and add them to the Budget variable. Once each item has been added, the program should then ask if they would like to change the spending limit from the default (default should be the monthly payment). After verifying spending limits, the program should then ask how much money should be put into a savings account and then display any left over funds. If the left over funds are not at 0, the user should be prompted to adjust their budget. The second item on the menu should allow the user to record a transaction, the transactions should record if money was coming in, or going out, categorize all money going out into a payment type, adjust how much money has been used for each type, add all transactions to a list, and if any budget category ever goes below 0 funds left keptBudget should be set to false. The third menu item should list all transaction information. Menu item four will be to Adjust Budget, where the user should be given a switch showing which items to adjust and exit upon entering "quit" or a number assigned to quit. Menu items five and six should be to save and load Budget information and option six will be to exit the program.
+
+
+
+
+
+
+
+
