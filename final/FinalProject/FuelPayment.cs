@@ -1,0 +1,4 @@
+class FuelPayment : Payment
+{
+
+}

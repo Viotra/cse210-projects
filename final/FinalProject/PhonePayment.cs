@@ -1,0 +1,4 @@
+class PhonePayment : Payment
+{
+
+}

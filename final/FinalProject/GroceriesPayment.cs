@@ -1,0 +1,4 @@
+class GroceriesPayment : Payment
+{
+
+}
