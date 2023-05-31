@@ -1,4 +1,8 @@
-class WaterPayment : Payment
+class WaterPayment : VariablePayment
 {
+    public WaterPayment()
+        : base()
+        {
+        }
 
 }

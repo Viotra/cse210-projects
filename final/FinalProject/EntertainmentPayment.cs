@@ -1,4 +1,8 @@
-class EntertainmentPayment : Payment
+class EntertainmentPayment : VariablePayment
 {
+    public EntertainmentPayment()
+        : base()
+        {
 
+        }
 }

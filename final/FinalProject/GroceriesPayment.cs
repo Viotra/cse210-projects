@@ -1,4 +1,8 @@
-class GroceriesPayment : Payment
+class GroceriesPayment : VariablePayment
 {
+    public GroceriesPayment()
+        : base()
+        {
 
+        }
 }

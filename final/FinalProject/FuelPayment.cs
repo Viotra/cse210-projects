@@ -1,4 +1,8 @@
-class FuelPayment : Payment
+class FuelPayment : VariablePayment
 {
+    public FuelPayment()
+        : base()
+        {
 
+        }
 }
