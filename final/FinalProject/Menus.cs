@@ -3,12 +3,13 @@ class Menus
     private List<string> _mainMenu = new List<string>()
     {
         "1. Create New Budget",
-        "2. Add Transaction",
-        "3. All Transactions",
-        "4. Adjust Budget",
-        "5. Save Budget",
-        "6. Load Budget",
-        "7. Quit"
+        "2. Show Budget",
+        "3. Add Transaction",
+        "4. All Transactions",
+        "5. Adjust Budget",
+        "6. Save Budget",
+        "7. Load Budget",
+        "8. Quit"
     };
 
     private List<string> _createBudgetMenu = new List<string>()
@@ -43,6 +44,7 @@ class Menus
     public void DisplayCreateBudgetMenu()
     {
         Console.Clear();
+        Console.WriteLine("When finished, enter \"back\":");
         foreach (string line in _createBudgetMenu)
         {
             Console.WriteLine(line);

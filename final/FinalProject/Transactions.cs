@@ -1,18 +1,21 @@
 class Transactions
 {
-    List<Payment> _allTransactions = new List<Payment>();
+    List<string> _allTransactions = new List<string>();
 
-    public void AddTransaction(Payment transaction)
+    public float AddTransaction(string transactionType)
     {
-        string transactionType = transaction.GetPaymentType();
-        float 
+        DateOnly transactionDate = DateOnly.FromDateTime(DateTime.Now);
+        Console.WriteLine("How munch money was spent or gained? ");
+        float transactionAmount = float.Parse(Console.ReadLine());
+        string transaction = $"{transactionDate} {transactionType} ${transactionAmount}";
         _allTransactions.Add(transaction);
+        return transactionAmount;
     }
     public void DisplayAllTransactions()
     {
-        foreach (Payment payment in _allTransactions)
+        foreach (string transaction in _allTransactions)
         {
-            payment.DisplayTransaction();
+            Console.WriteLine(transaction);
         }
     }
 }

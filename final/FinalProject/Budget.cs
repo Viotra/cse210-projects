@@ -2,16 +2,35 @@ class Budget
 {
     private List<Payment> _allPayments = new List<Payment>();
     private List<string> _unnecessaryPayment = new List<string>();
-    private bool _inBudget;
+    private bool _inBudget, _isTithePayer;
     //private List<Payment> _savingsGoals = new List<Payment>(); May be able to just create a method to show this.
-    private float _monthlyIncome;
+    private float _monthlyIncome, _currentIncome;
     private float _leftOverFunds;
+
+    public List<Payment> GetAllPayments()
+    {
+        return _allPayments;
+    }
 
     public void AddPayment(Payment payment)
     {
         _allPayments.Add(payment);
     }
 
+    public float GetIncome()
+    {
+        return _currentIncome;
+    }
+    
+    public void AddIncome(float income)
+    {
+        _currentIncome += income;
+    }
+
+    public void SubtractIncome(float income)
+    {
+        _currentIncome -= income;
+    }
     public void SetMonthlyIncome()
     {
         Console.WriteLine("On average, how much money do you bring home each month? ");
@@ -61,5 +80,22 @@ class Budget
     public bool GetInBudget()
     {
         return _inBudget;
+    }
+
+    public void DisplayBudget()
+    {
+        Console.WriteLine("Each Budget item is displayed below: ");
+
+        foreach (Payment payment in _allPayments)
+        {
+            string paymentType = payment.GetPaymentType();
+            float spendingLimit = payment.GetSpendingLimit();
+            float actualAmount = payment.GetPaymentAmount();
+            bool inLimit = payment.GetInLimit();
+
+            Console.WriteLine($"{paymentType} Spending Limit: ${actualAmount}/${spendingLimit} In Limits: {inLimit}");
+        }
+
+        Console.ReadLine();
     }
 }

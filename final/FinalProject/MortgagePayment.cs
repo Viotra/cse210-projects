@@ -62,10 +62,10 @@ class MortgagePayment : Payment
         Console.WriteLine(payOff);
     }
 
-    public DateOnly GetPayoffDate()
-    {
-        return  _payOffDate;
-    }
+    // public DateOnly GetPayoffDate()
+    // {
+    //     return  _payOffDate;
+    // }
 
     // public override void SetMonthlyPayment(float monthlyPayment)
     // {
