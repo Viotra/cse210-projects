@@ -50,4 +50,28 @@ class Menus
             Console.WriteLine(line);
         }
     }
+
+    public void DisplayAdjustmentItems(Payment payment)
+    {
+        float spendingLimit = payment.GetSpendingLimit();
+        float actualAmount = payment.GetPaymentAmount();
+        float availableFunds = payment.GetAvailableFunds();
+
+        Console.WriteLine($"1. Spending Limit: {spendingLimit}");
+        Console.WriteLine($"2. Amount Spent: {actualAmount}");
+        Console.WriteLine($"3. Amount Available: {availableFunds}");
+    }
+    public void DisplayAllBudgetItems(Budget budget)
+    {
+        List<Payment> allPayments = budget.GetAllPayments();
+        int i, budgetLength;
+        budgetLength = allPayments.Count;
+
+        for (i = 0; i < budgetLength; i++)
+        {  
+            string paymentType = allPayments[i].GetPaymentType();    
+            Console.WriteLine($"{i + 1}. {paymentType}");                                                  
+        }
+        Console.WriteLine($"{budgetLength + 1}. Income");
+    }
 }

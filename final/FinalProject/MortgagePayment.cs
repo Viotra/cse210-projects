@@ -1,20 +1,12 @@
-class MortgagePayment : Payment
+class MortgagePayment : FixedPayment
 {
-    private float _interestRate, _pricipleAmount, _extraToPriciple;
+    private float _interestRate, _pricipleAmount;
     private int _numberOfPayments;
-    private DateOnly _payOffDate = new DateOnly();
 
-    public MortgagePayment()
-        : base()
-        {
-            Console.WriteLine("How much is left on your loan?");
-            _pricipleAmount = float.Parse(Console.ReadLine());
-            Console.WriteLine("How many more payments are left on your loan?");
-            _numberOfPayments = int.Parse(Console.ReadLine());
-            Console.WriteLine("What is the interest rate on your loan?");
-            _interestRate = float.Parse(Console.ReadLine()) / 100;
+    public MortgagePayment(string paymentType = "Mortgage")
+        : base(paymentType)
+        {            
 
-            CalculateMonthlyPayment();
         }
 
     // public float CalculateAmountToPriciple()
@@ -32,21 +24,85 @@ class MortgagePayment : Payment
         _pricipleAmount = pricipleAmount;
     }
 
-    public void CalculateMonthlyPayment()
+    //This was originally a CalculateMonthlyPayment and the SetMonthlyPayment was what is now UpdateMonthlyPayment
+    //This was changed to demonstrate the override aspect of Polymorphism
+    public float CalculateMonthlyPayment(int years)
     {
+        int numberOfPayments = years * 12;
         float periodicInterest = _interestRate/12;
-        double x = Math.Pow((1 + periodicInterest), _numberOfPayments);
-        double monthlyPayment = _pricipleAmount * (((periodicInterest * x) /(x - 1)));
+        double x = Math.Pow((1 + periodicInterest), numberOfPayments);
+        float monthlyPayment = (float) (_pricipleAmount * (((periodicInterest * x) /(x - 1))));
 
-        SetMonthlyPayment((float) monthlyPayment);
+        return monthlyPayment;
     }
 
-    public void SetAdditionalToPrinciple(float additionalToPrinciple)
+public override void SetMonthlyPayment()
     {
+        float monthlyPayment;
 
+        Console.WriteLine("What is your monthly mortgage payment? ");
+        monthlyPayment = float.Parse(Console.ReadLine());
+        Console.WriteLine("How much is left on your loan?");
+        _pricipleAmount = float.Parse(Console.ReadLine());
+        Console.WriteLine("How many more payments are left on your loan?");
+        _numberOfPayments = int.Parse(Console.ReadLine());
+        Console.WriteLine("What is the interest rate on your loan?");
+        _interestRate = float.Parse(Console.ReadLine()) / 100;
+
+        Console.WriteLine($"Your monthly payment is {monthlyPayment} and will be paid off in {_numberOfPayments/12} years.");
+        Console.WriteLine("Would you like to pay a little extra to pay off your loan quicker? (yes/no)");
+                                    
+        string userInput = Console.ReadLine().ToLower();
+
+
+            if (userInput == "yes" || userInput == "y")
+            {
+                userInput = "";
+                
+                while(userInput != "back")
+                {
+                    Console.WriteLine("Type '1' if you would like to set a payment based on the number of years to"
+                    + " pay off your loan, or '2' to set an exact amount or type 'back' to return:");
+
+                    userInput = Console.ReadLine();
+
+                    if (userInput == "1")
+                    {
+                        Console.WriteLine("In how many years would you like to pay off your loan?");
+                        int years = int.Parse(Console.ReadLine());
+                        monthlyPayment = CalculateMonthlyPayment(years);
+
+                        Console.WriteLine($"Your new payment amount will be {monthlyPayment}. Is this okay? (yes/no)");
+                        userInput = Console.ReadLine();
+
+                        if(userInput == "yes" || userInput == "y")
+                        {
+                            _monthlyPayment = monthlyPayment;
+                            userInput = "back";
+                        }
+                    }
+                    else if (userInput == "2")
+                    {
+                        Console.WriteLine("What would your new monthly payment be? ");
+
+                        monthlyPayment = float.Parse(Console.ReadLine());
+                        float yearsToPayOff = CalculatePayoffDate(monthlyPayment);
+
+                        Console.WriteLine($"You should be able to pay off your loan in {yearsToPayOff} years." 
+                        + " Is this acceptable? (yes/no or type \"back\" to exit)");
+                        userInput = Console.ReadLine();
+
+                        if (userInput == "yes" || userInput == "y")
+                        {
+                            _monthlyPayment = monthlyPayment;
+                            userInput = "back";
+                        }
+                    }
+                }
+            }
     }
 
-    public void CalculatePayoffDate(float paymentAmount)
+    public float CalculatePayoffDate(float paymentAmount)
     {
         // The formula is -1 * log(1 - r * a / p) / log (1 + r), where p is the monthly payment,
         // r is the interest rate and a is the amount owed. The log function is the standard natural
@@ -57,15 +113,9 @@ class MortgagePayment : Payment
         float a = _pricipleAmount;
         float p = paymentAmount;
         
-        double payOff = -1 * Math.Log(1 - r * a / p) / Math.Log(1 + r);
-
-        Console.WriteLine(payOff);
+        double payOff = (-1 * Math.Log(1 - r * a / p) / Math.Log(1 + r))/12;
+        return (float) payOff;
     }
-
-    // public DateOnly GetPayoffDate()
-    // {
-    //     return  _payOffDate;
-    // }
 
     // public override void SetMonthlyPayment(float monthlyPayment)
     // {

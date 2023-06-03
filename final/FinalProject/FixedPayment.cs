@@ -1,10 +1,14 @@
 class FixedPayment : Payment
 {
-    public FixedPayment()
+    public FixedPayment(string paymentType) : base(paymentType)
     {
         _isFixedPayment = true;
-        
-        Console.WriteLine("What is your monthly payment? ");
-        SetMonthlyPayment(float.Parse(Console.ReadLine()));
+        SetMonthlyPayment();
+    }
+
+    public override void SetMonthlyPayment()
+    {
+        Console.WriteLine("How much is your monthly payment? ");
+        _monthlyPayment = float.Parse(Console.ReadLine());
     }
 }

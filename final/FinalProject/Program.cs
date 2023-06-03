@@ -7,7 +7,10 @@ class Program
             Budget budget = new Budget();
             Transactions transactions = new Transactions();
             Menus menus = new Menus();
-            string userInput = "";
+            Payment selectedPayment;
+            string userInput = "", paymentType;
+            float monthlyPayment;
+            int i, budgetLength;
 
             while (userInput != "8" && userInput != "quit")
             {
@@ -29,24 +32,18 @@ class Program
                             {
                                 case "1":
                                     MortgagePayment mortgagePayment = new MortgagePayment();
-                                    Console.WriteLine(mortgagePayment.GetMonthlyPayment());
-                                    Console.ReadLine();
-                                    Console.WriteLine("Enter the amount you wish to pay each month:");
-                                    paymentAmount = float.Parse(Console.ReadLine());
-                                    mortgagePayment.CalculatePayoffDate(paymentAmount);
-                                    Console.ReadLine();
                                     budget.AddPayment(mortgagePayment);
                                     break;
                                 case "2":
-                                    PhonePayment phonePayment = new PhonePayment();
+                                    FixedPayment phonePayment = new FixedPayment("Phone");
                                     budget.AddPayment(phonePayment);
                                     break;
                                 case "3":
-                                    InternetPayment internetPayment = new InternetPayment();
+                                    FixedPayment internetPayment = new FixedPayment("Internet");
                                     budget.AddPayment(internetPayment);
                                     break;
                                 case "4":
-                                    InsurancePayment insurancePayment = new InsurancePayment();
+                                    FixedPayment insurancePayment = new FixedPayment("Insurance");
                                     budget.AddPayment(insurancePayment);
                                     break;
                                 case "5":
@@ -54,15 +51,15 @@ class Program
                                     budget.AddPayment(groceriesPayment);
                                     break;
                                 case "6":
-                                    GasPayment gasPayment = new GasPayment();
+                                    VariablePayment gasPayment = new VariablePayment("Gas");
                                     budget.AddPayment(gasPayment);
                                     break;
                                 case "7":
-                                    ElectricPayment electricPayment = new ElectricPayment();
+                                    VariablePayment electricPayment = new VariablePayment("Electric");
                                     budget.AddPayment(electricPayment);
                                     break;
                                 case "8":
-                                    WaterPayment waterPayment = new WaterPayment();
+                                    VariablePayment waterPayment = new VariablePayment("Water");
                                     budget.AddPayment(waterPayment);
                                     break;
                                 case "9":
@@ -84,13 +81,22 @@ class Program
 
                             foreach (Payment payment in budget.GetAllPayments())
                             {
-                                paymentAmount = payment.GetMonthlyPayment();
-                                string paymentType = payment.GetPaymentType();
-                                Console.WriteLine($"The current amount you spend in the {paymentType} category is {paymentAmount}.");
-                                Console.WriteLine("How much would you like to limit this category to?");
-                                float spendingLimit = float.Parse(Console.ReadLine());
+                                if (payment.GetIsFixedPayment() == false)
+                                {    
+                                    paymentAmount = payment.GetMonthlyPayment();
+                                    paymentType = payment.GetPaymentType();
+                                    Console.WriteLine($"The current amount you spend in the {paymentType} category is {paymentAmount}.");
+                                    Console.WriteLine("How much would you like the spending limit for this category to be?");
+                                    float spendingLimit = float.Parse(Console.ReadLine());
 
-                                payment.SetSpendingLimit(spendingLimit);
+                                    payment.SetSpendingLimit(spendingLimit);
+                                }
+                                else
+                                {
+                                    monthlyPayment = payment.GetMonthlyPayment();
+                                    payment.SetSpendingLimit(monthlyPayment);
+                                    payment.SetAvailableFunds(monthlyPayment);
+                                }
                             }
                         break;
                     case "2":
@@ -99,19 +105,12 @@ class Program
                         break;
                     case "3":
                     case "add transaction":
-                        List<Payment> allPayments = budget.GetAllPayments();
-                        int i;
-                        string transactionType;
-
+                        
                         Console.WriteLine("Select which type of payment you'll be making: ");
 
-                        int budgetLength = allPayments.Count;
-                        for (i = 0; i < budgetLength; i++)
-                        {  
-                            transactionType = allPayments[i].GetPaymentType();    
-                            Console.WriteLine($"{i + 1}. {transactionType}");                                                  
-                        }
-                        Console.WriteLine($"{budgetLength + 1}. Income");
+                        menus.DisplayAllBudgetItems(budget);
+
+                        budgetLength = budget.GetAllPayments().Count;
 
                         i = int.Parse(Console.ReadLine()) - 1;
                         
@@ -122,10 +121,11 @@ class Program
                         }
                         else
                         {
-                            Payment payment = allPayments[i];
-                            transactionType = payment.GetPaymentType();
-                            paymentAmount = transactions.AddTransaction(transactionType);
-                            payment.ReduceSpendingLimit(paymentAmount);
+                            selectedPayment = budget.GetAllPayments()[i];
+                            paymentType = selectedPayment.GetPaymentType();
+                            paymentAmount = transactions.AddTransaction(paymentType);
+                            selectedPayment.SetPaymentAmount(paymentAmount);
+                            selectedPayment.SetAvailableFunds(paymentAmount);
                         }
                         break;
                     case "4":
@@ -134,6 +134,33 @@ class Program
                         break;
                     case "5":
                     case "adjust budget":
+                        budgetLength = budget.GetAllPayments().Count;
+
+                        Console.WriteLine("Which item would you like to change?");
+                        menus.DisplayAllBudgetItems(budget);
+                        i = int.Parse(Console.ReadLine());
+                        selectedPayment = budget.GetAllPayments()[i];
+
+                        Console.WriteLine("What would you like to change in this item?");
+                        menus.DisplayAdjustmentItems(selectedPayment);
+                        i = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine("What would you like the new amount to be?");
+                        int newAmount = int.Parse(Console.ReadLine());
+
+                        switch (i)
+                        {
+                            case 1:
+                                selectedPayment.SetSpendingLimit(newAmount);
+                                break;
+                            case 2:
+                                selectedPayment.SetPaymentAmount(newAmount);
+                                break;
+                            case 3:
+                                selectedPayment.SetAvailableFunds(newAmount);
+                                break;
+                        }
+
                         break;
                     case "6":
                     case "save budget":

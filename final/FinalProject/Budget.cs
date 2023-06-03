@@ -91,6 +91,7 @@ class Budget
             string paymentType = payment.GetPaymentType();
             float spendingLimit = payment.GetSpendingLimit();
             float actualAmount = payment.GetPaymentAmount();
+            float availableFunds = payment.GetAvailableFunds();
             bool inLimit = payment.GetInLimit();
 
             Console.WriteLine($"{paymentType} Spending Limit: ${actualAmount}/${spendingLimit} In Limits: {inLimit}");

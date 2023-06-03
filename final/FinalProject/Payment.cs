@@ -1,15 +1,14 @@
-class Payment
+public abstract class Payment
 {
     private string _paymentType;
-    private float _monthlyPayment, _percentageOfIncome, _spendingLimit, _paymentAmount;
+    private float _percentageOfIncome, _spendingLimit, _paymentAmount, _availableFunds;
+    protected float _monthlyPayment;
     protected bool _isFixedPayment;
     private bool _inLimit = true;
 
-    DateOnly _paymentDate = new DateOnly();
-
-    public Payment()
+    public Payment(string paymentType)
     {
-        _paymentType = this.GetType().Name;
+        _paymentType = paymentType;
     }
 
     public bool GetInLimit()
@@ -24,25 +23,38 @@ class Payment
             _inLimit = false;
         }
     }
+
+    public bool GetIsFixedPayment()
+    {
+        return _isFixedPayment;
+    }
     // public void DisplayTransaction()
     // {
     //     string transaction = string.Format("{0} for ${1} on {2}", _paymentType, _paymentAmount, _paymentDate);
     //     Console.WriteLine(transaction);
     // }
-    public void SetMonthlyPayment(float monthlyPayment)
-    {
-        _monthlyPayment = monthlyPayment;
-    }    
+    public abstract void SetMonthlyPayment();
 
     public float GetMonthlyPayment()
     {
         return _monthlyPayment;
     }
 
-    public void ReduceSpendingLimit(float paymentAmount)
+    public void SetAvailableFunds(float monthlyPayment)
     {
-        _spendingLimit -= paymentAmount;
+        _availableFunds = monthlyPayment;
     }
+
+    public void UpdateAvailableFunds(float payment)
+    {
+        _availableFunds -= payment;
+    }
+    
+    public float GetAvailableFunds()
+    {
+        return _availableFunds;
+    }
+
     public string GetPaymentType()
     {
         return _paymentType;
@@ -71,5 +83,10 @@ class Payment
     public float GetPaymentAmount()
     {
         return _paymentAmount;
+    }
+
+    public void SetPaymentAmount(float paymentAmount)
+    {
+        _paymentAmount = paymentAmount;
     }
 }
