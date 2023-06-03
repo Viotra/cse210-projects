@@ -13,6 +13,7 @@ public abstract class Payment
 
     public bool GetInLimit()
     {
+        SetInLimit();
         return _inLimit;
     }
 

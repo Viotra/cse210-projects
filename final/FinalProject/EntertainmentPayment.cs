@@ -14,6 +14,6 @@ class EntertainmentPayment : VariablePayment
     public override void SetPaymentAmount(float paymentAmount)
     {
         base.SetPaymentAmount(paymentAmount);
-
+        
     }
 }

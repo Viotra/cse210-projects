@@ -72,11 +72,16 @@ class Program
                                     break;
                                 case "11":
                                     budget.SetMonthlyIncome();
-                                    break;
-                                case "12":
+                                    budget.SetIsTithePayer();
+
+                                    if(budget.GetIsTithePayer() == true)
+                                    {
+                                        Tithing tithing = new Tithing(budget.GetMonthlyIncome());
+                                    }
                                     break;
                             }
                         }
+                        Console.Clear();
                         budget.CalculatePercentageOfIncome();
 
                             foreach (Payment payment in budget.GetAllPayments())
@@ -105,7 +110,7 @@ class Program
                         break;
                     case "3":
                     case "add transaction":
-                        
+                        Console.Clear();
                         Console.WriteLine("Select which type of payment you'll be making: ");
 
                         menus.DisplayAllBudgetItems(budget);
@@ -166,8 +171,14 @@ class Program
                             case 3:
                                 selectedPayment.SetAvailableFunds(newAmount);
                                 break;
+                            case 4:
+                                if (selectedPayment is VariablePayment)
+                                {
+                                    VariablePayment variablePayment = (VariablePayment) selectedPayment;
+                                    variablePayment.SetUnnecessaryPayment(newAmount);
+                                }
+                                break;
                         }
-
                         break;
                     case "6":
                     case "save budget":

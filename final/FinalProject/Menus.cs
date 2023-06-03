@@ -60,6 +60,13 @@ class Menus
         Console.WriteLine($"1. Spending Limit: {spendingLimit}");
         Console.WriteLine($"2. Amount Spent: {actualAmount}");
         Console.WriteLine($"3. Amount Available: {availableFunds}");
+        if (payment is VariablePayment)
+        {
+            VariablePayment variablePayment = (VariablePayment) payment;
+            float unnecessarySpending = variablePayment.GetUnnecessaryPayment();
+            
+            Console.WriteLine($"4. Unnecessary Spending: {unnecessarySpending}");
+        }
     }
     public void DisplayAllBudgetItems(Budget budget)
     {

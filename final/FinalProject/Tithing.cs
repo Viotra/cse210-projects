@@ -1,17 +1,26 @@
-class Tithing
+class Tithing : Payment
 {
-    private bool _isPaid;
-    private float _tithingAmount;
+    private float _tithingAmount, _estimatedMontlyTithing;
 
-    public Tithing(float income)
-        {
-            _tithingAmount = income * 0.10f;
-        }
-    public void SetIsPaid(bool isPaid)
+    public Tithing (float income, string paymentType = "Tithing") : base (paymentType)
     {
-        _isPaid = isPaid;
+        _estimatedMontlyTithing = CalculateTithingAmount(income);
     }
 
+    public void SetTithingAmount(float tithing)
+    {
+        _tithingAmount = tithing;
+    }
+
+    public float CalculateTithingAmount(float income)
+    {
+        return income * 0.1f;
+    }
+
+    public override void SetMonthlyPayment()
+    {
+        throw new NotImplementedException();
+    }
     // public override void SetMonthlyPayment(float monthlyPayment)
     // {
     //     base.SetMonthlyPayment(monthlyPayment * 0.1f);

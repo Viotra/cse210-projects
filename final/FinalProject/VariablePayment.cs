@@ -10,6 +10,11 @@ class VariablePayment : Payment
         SetMaxPayment();
     }
 
+    public void SetUnnecessaryPayment(float paymentAmount)
+    {
+        _unnecessaryPayment = paymentAmount;
+    }
+
     public override void SetMonthlyPayment()
     {
         Console.WriteLine("How much money do you spend on average each month for this item?");

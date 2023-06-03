@@ -2,7 +2,7 @@ class Budget
 {
     private List<Payment> _allPayments = new List<Payment>();
     private float _totalUnnecessaryPayment = 0;
-    private bool _inBudget, _isTithePayer;
+    private bool _inBudget, _isTithePayer = false;
     //private List<Payment> _savingsGoals = new List<Payment>(); May be able to just create a method to show this.
     private float _monthlyIncome, _currentIncome;
     private float _leftOverFunds;
@@ -12,6 +12,10 @@ class Budget
         return _allPayments;
     }
 
+    public float GetMonthlyIncome()
+    {
+        return _monthlyIncome;
+    }
     public void AddPayment(Payment payment)
     {
         _allPayments.Add(payment);
@@ -69,6 +73,21 @@ class Budget
         _leftOverFunds = leftOverFunds;
     }
 
+    public void SetIsTithePayer()
+    {
+        Console.WriteLine("Do you pay tithing? ");
+        string userInput = Console.ReadLine();
+
+        if (userInput == "yes" || userInput == "y")
+        {
+            _isTithePayer = true;
+        }
+    }
+
+    public bool GetIsTithePayer()
+    {
+        return _isTithePayer;
+    }
     public void SetInBudget()
     {
         _inBudget = true;
@@ -89,6 +108,7 @@ class Budget
 
     public void DisplayBudget()
     {
+        Console.Clear();
         Console.WriteLine("Each Budget item is displayed below: ");
 
         foreach (Payment payment in _allPayments)
