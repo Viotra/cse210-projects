@@ -1,7 +1,7 @@
 class Budget
 {
     private List<Payment> _allPayments = new List<Payment>();
-    private List<string> _unnecessaryPayment = new List<string>();
+    private float _totalUnnecessaryPayment = 0;
     private bool _inBudget, _isTithePayer;
     //private List<Payment> _savingsGoals = new List<Payment>(); May be able to just create a method to show this.
     private float _monthlyIncome, _currentIncome;
@@ -25,6 +25,11 @@ class Budget
     public void AddIncome(float income)
     {
         _currentIncome += income;
+    }
+
+    public void SetCurrentIncome(float income)
+    {
+        _currentIncome = income;
     }
 
     public void SubtractIncome(float income)
@@ -93,9 +98,25 @@ class Budget
             float actualAmount = payment.GetPaymentAmount();
             float availableFunds = payment.GetAvailableFunds();
             bool inLimit = payment.GetInLimit();
+            _totalUnnecessaryPayment = 0;
+
+            Console.WriteLine($"Income: {_currentIncome}/{_monthlyIncome}");
+            if (payment is VariablePayment)
+            {
+                VariablePayment variablePayment = (VariablePayment) payment;
+                _totalUnnecessaryPayment += variablePayment.GetUnnecessaryPayment();
+            }
 
             Console.WriteLine($"{paymentType} Spending Limit: ${actualAmount}/${spendingLimit} In Limits: {inLimit}");
+              if (payment is FuelPayment)
+            {
+                FuelPayment fuelPayment = (FuelPayment) payment;
+                int fuelUps = fuelPayment.GetFuelUps();
+                int fuelUpGoal = fuelPayment.GetFuelUpGoal();
+                Console.WriteLine($"Fuel up goal: {fuelUps} / {fuelUpGoal}");
+            }
         }
+        Console.WriteLine($"Estimated money that could have been saved: {_totalUnnecessaryPayment}");
 
         Console.ReadLine();
     }

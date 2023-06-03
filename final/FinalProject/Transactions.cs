@@ -17,5 +17,6 @@ class Transactions
         {
             Console.WriteLine(transaction);
         }
+        Console.ReadLine();
     }
 }

@@ -4,7 +4,7 @@ public abstract class Payment
     private float _percentageOfIncome, _spendingLimit, _paymentAmount, _availableFunds;
     protected float _monthlyPayment;
     protected bool _isFixedPayment;
-    private bool _inLimit = true;
+    protected bool _inLimit = true;
 
     public Payment(string paymentType)
     {
@@ -16,7 +16,7 @@ public abstract class Payment
         return _inLimit;
     }
 
-    public void SetInLimit()
+    public virtual void SetInLimit()
     {
         if (_paymentAmount > _spendingLimit)
         {
@@ -85,7 +85,7 @@ public abstract class Payment
         return _paymentAmount;
     }
 
-    public void SetPaymentAmount(float paymentAmount)
+    public virtual void SetPaymentAmount(float paymentAmount)
     {
         _paymentAmount = paymentAmount;
     }

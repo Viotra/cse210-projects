@@ -138,7 +138,14 @@ class Program
 
                         Console.WriteLine("Which item would you like to change?");
                         menus.DisplayAllBudgetItems(budget);
-                        i = int.Parse(Console.ReadLine());
+                        i = int.Parse(Console.ReadLine()) - 1;
+
+                        if (i == budgetLength)
+                        {
+                            Console.WriteLine("What should the current income be?");
+                            float income = float.Parse(Console.ReadLine());
+                            budget.SetCurrentIncome(income);
+                        }
                         selectedPayment = budget.GetAllPayments()[i];
 
                         Console.WriteLine("What would you like to change in this item?");

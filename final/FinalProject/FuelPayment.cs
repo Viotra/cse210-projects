@@ -1,9 +1,58 @@
 class FuelPayment : VariablePayment
 {
+    int _fuelUps, _fuelUpGoal;
     public FuelPayment(string paymentType = "Fuel") : base(paymentType)
         {
+            Console.WriteLine("How many times a monthy do you fuel up?");
+            Console.ReadLine();
+            Console.WriteLine("Would it be possible to lower vehicle usage and limit the number"
+            + " of fuel ups? (yes/no)");
+            string userInput = Console.ReadLine();
 
+            if (userInput == "yes" || userInput == "y")
+            {
+                Console.WriteLine("How many fuel ups would you like to aim for?");
+                _fuelUpGoal = int.Parse(Console.ReadLine());
+                Console.WriteLine($"Your goal has been set to {_fuelUpGoal} fuel ups.");
+            }
         }
-    //Set goal to ask how many times the user goes to fuel up in a month, then ask if they would like to set the goal to one less
-    //fuel up
+
+    public int GetFuelUpGoal()
+    {
+        return _fuelUpGoal;
+    }
+
+    public void SetFuelUpGoal(int fuelUpGoal)
+    {
+        _fuelUpGoal = fuelUpGoal;
+    }
+
+    public int GetFuelUps()
+    {
+        return _fuelUps;
+    }
+
+    public void SetFuelUps(int fuelUps)
+    {
+        _fuelUps = fuelUps;
+    }
+
+    public void AddFuelUp()
+    {
+        _fuelUps++;
+    }
+
+     public override void SetPaymentAmount(float paymentAmount)
+    {
+        base.SetPaymentAmount(paymentAmount);
+        Console.WriteLine("Was there any extra car usage which could have been avoided? (yes/no)");
+        string userInput = Console.ReadLine();
+        if (userInput == "yes" || userInput == "y")
+        {
+            Console.WriteLine("How much money would you estimate could have been saved?");
+            float unnecessarySpending = float.Parse(Console.ReadLine());
+            AddUnnecessaryPayment(unnecessarySpending);
+        }
+        AddFuelUp();
+    }
 }
