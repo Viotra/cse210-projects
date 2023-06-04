@@ -24,8 +24,7 @@ class Menus
         "8. Water Payment",
         "9. Fuel Payment",
         "10. Entertainment Payment",
-        "11. Income",
-        "12. Tithing"
+        "11. Income"
     };
     private List<string> _paymentInformation = new List<string>()
     {

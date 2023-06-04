@@ -1,0 +1,11 @@
+3000,0,0,True,
+Mortgage,1300,0,1300,1300,True,0.0535,200000,248,True
+Phone,45,0,45,45,True,True
+Internet,100,0,100,100,True,True
+Insurance,200,0,200,200,True,True
+Groceries,280,0,0,300,True,350,False
+Gas,40,0,0,40,True,80,False
+Electric,30,0,0,30,True,40,False
+Water,80,0,0,90,True,100,False
+Fuel,180,0,0,200,True,200,4,4,False
+Entertainment,30,0,0,40,True,60,False

@@ -9,15 +9,15 @@ class MortgagePayment : FixedPayment
 
         }
 
-    // public float CalculateAmountToPriciple()
-    // {
-
-    // }
-
-    // public float CalculateAmountToInterest()
-    // {
-
-    // }
+    public MortgagePayment(string paymentType, float spendingLimit, float paymentAmount, float availableFunds
+        , float monthlyPayment, bool inLimit, float interestRate, float principleAmount, int numberOfPayments,
+        bool isFixedPayment = true) : base(paymentType, spendingLimit, paymentAmount, availableFunds, 
+        monthlyPayment, inLimit, isFixedPayment)
+        {
+            _interestRate = interestRate;
+            _pricipleAmount = principleAmount;
+            _numberOfPayments = numberOfPayments;
+        }
 
     public void SetPricipleAmount(float pricipleAmount)
     {
@@ -35,7 +35,13 @@ class MortgagePayment : FixedPayment
 
         return monthlyPayment;
     }
-
+public override void SetInLimit()
+    {
+        if (_monthlyPayment < GetSpendingLimit())
+        {
+            _inLimit = false;
+        }
+    }
 public override void SetMonthlyPayment()
     {
         float monthlyPayment;
@@ -48,6 +54,8 @@ public override void SetMonthlyPayment()
         _numberOfPayments = int.Parse(Console.ReadLine());
         Console.WriteLine("What is the interest rate on your loan?");
         _interestRate = float.Parse(Console.ReadLine()) / 100;
+
+        _monthlyPayment = monthlyPayment;
 
         Console.WriteLine($"Your monthly payment is {monthlyPayment} and will be paid off in {_numberOfPayments/12} years.");
         Console.WriteLine("Would you like to pay a little extra to pay off your loan quicker? (yes/no)");
@@ -115,6 +123,21 @@ public override void SetMonthlyPayment()
         
         double payOff = (-1 * Math.Log(1 - r * a / p) / Math.Log(1 + r))/12;
         return (float) payOff;
+    }
+
+    public float GetPrincipleAmount()
+    {
+        return _pricipleAmount;
+    }
+
+    public int GetNumberOfPayments()
+    {
+        return _numberOfPayments;
+    }
+
+    public float GetInterestRate()
+    {
+        return _interestRate;
     }
 
     // public override void SetMonthlyPayment(float monthlyPayment)

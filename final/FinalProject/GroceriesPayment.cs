@@ -5,6 +5,14 @@ class GroceriesPayment : VariablePayment
 
     }
 
+    public GroceriesPayment(string paymentType, float spendingLimit, float paymentAmount, float availableFunds
+        , float monthlyPayment, bool inLimit, float maxPayment, bool isFixedPayment = false) : base(
+        paymentType, spendingLimit, paymentAmount, availableFunds, monthlyPayment, inLimit, maxPayment, 
+        isFixedPayment)
+        {
+            
+        }
+
     public override void SetPaymentAmount(float paymentAmount)
     {
         base.SetPaymentAmount(paymentAmount);

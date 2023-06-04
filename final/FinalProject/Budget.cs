@@ -7,6 +7,19 @@ class Budget
     private float _monthlyIncome, _currentIncome;
     private float _leftOverFunds;
 
+    public Budget()
+    {
+
+    }
+
+    public Budget(float monthlyIncome, float currentIncome, float leftOverFunds, bool isTithePayer)
+    {
+        _monthlyIncome = monthlyIncome;
+        _currentIncome = currentIncome;
+        _leftOverFunds = leftOverFunds;
+        _isTithePayer = isTithePayer;
+    }
+
     public List<Payment> GetAllPayments()
     {
         return _allPayments;
@@ -19,11 +32,6 @@ class Budget
     public void AddPayment(Payment payment)
     {
         _allPayments.Add(payment);
-    }
-
-    public float GetIncome()
-    {
-        return _currentIncome;
     }
     
     public void AddIncome(float income)
@@ -66,7 +74,7 @@ class Budget
 
         foreach (Payment payment in _allPayments)
         {
-            float paymentAmount = payment.GetMonthlyPayment();
+            float paymentAmount = payment.GetSpendingLimit();
 
             leftOverFunds -= paymentAmount;
         }
@@ -101,6 +109,16 @@ class Budget
         }
     }
 
+    public float GetCurrentIncome()
+    {
+        return _currentIncome;
+    }
+
+    public float GetLeftOverFunds()
+    {
+        return _leftOverFunds;
+    }
+
     public bool GetInBudget()
     {
         return _inBudget;
@@ -110,6 +128,8 @@ class Budget
     {
         Console.Clear();
         Console.WriteLine("Each Budget item is displayed below: ");
+        Console.WriteLine();
+        Console.WriteLine($"Income: {_currentIncome}/{_monthlyIncome}");
 
         foreach (Payment payment in _allPayments)
         {
@@ -120,15 +140,23 @@ class Budget
             bool inLimit = payment.GetInLimit();
             _totalUnnecessaryPayment = 0;
 
-            Console.WriteLine($"Income: {_currentIncome}/{_monthlyIncome}");
             if (payment is VariablePayment)
             {
                 VariablePayment variablePayment = (VariablePayment) payment;
                 _totalUnnecessaryPayment += variablePayment.GetUnnecessaryPayment();
             }
 
-            Console.WriteLine($"{paymentType} Spending Limit: ${actualAmount}/${spendingLimit} In Limits: {inLimit}");
-              if (payment is FuelPayment)
+            if (payment is Tithing)
+            {
+                float monthlyPayment = payment.GetMonthlyPayment();
+                Console.WriteLine($"{paymentType} Spending Limit: ${actualAmount}/${monthlyPayment}");
+            }
+            else
+            {
+                Console.WriteLine($"{paymentType} Spending Limit: ${actualAmount}/${spendingLimit} Available Funds: ${availableFunds} In Limits: {inLimit}");
+            }
+
+            if (payment is FuelPayment)
             {
                 FuelPayment fuelPayment = (FuelPayment) payment;
                 int fuelUps = fuelPayment.GetFuelUps();

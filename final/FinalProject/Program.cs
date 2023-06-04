@@ -8,6 +8,7 @@ class Program
             Transactions transactions = new Transactions();
             Menus menus = new Menus();
             Payment selectedPayment;
+            SaveLoadBudget slb = new SaveLoadBudget();
             string userInput = "", paymentType;
             float monthlyPayment;
             int i, budgetLength;
@@ -77,24 +78,32 @@ class Program
                                     if(budget.GetIsTithePayer() == true)
                                     {
                                         Tithing tithing = new Tithing(budget.GetMonthlyIncome());
+                                        budget.AddPayment(tithing);
                                     }
                                     break;
                             }
                         }
                         Console.Clear();
                         budget.CalculatePercentageOfIncome();
+                        Console.ReadLine();
+                        
 
                             foreach (Payment payment in budget.GetAllPayments())
                             {
-                                if (payment.GetIsFixedPayment() == false)
+                                Console.Clear();
+                                if (payment is VariablePayment)
                                 {    
                                     paymentAmount = payment.GetMonthlyPayment();
                                     paymentType = payment.GetPaymentType();
-                                    Console.WriteLine($"The current amount you spend in the {paymentType} category is {paymentAmount}.");
+                                    Console.WriteLine($"The current amount you spend in the {paymentType} category is ${paymentAmount}.");
                                     Console.WriteLine("How much would you like the spending limit for this category to be?");
                                     float spendingLimit = float.Parse(Console.ReadLine());
 
                                     payment.SetSpendingLimit(spendingLimit);
+                                    payment.SetAvailableFunds(spendingLimit);
+
+                                    VariablePayment vPayment = (VariablePayment) payment;
+                                    vPayment.SetMaxPayment();
                                 }
                                 else
                                 {
@@ -103,9 +112,16 @@ class Program
                                     payment.SetAvailableFunds(monthlyPayment);
                                 }
                             }
+                            budget.SetLeftOverFunds();
+                            float leftOverFunds = budget.GetLeftOverFunds();
+                            Console.WriteLine($"If you stick to this budget, you should have ${leftOverFunds}"
+                                + " left over at the end of the month.");
+                            Console.ReadLine();
+
                         break;
                     case "2":
                     case "show budget":
+                        Console.Clear();
                         budget.DisplayBudget();
                         break;
                     case "3":
@@ -130,11 +146,12 @@ class Program
                             paymentType = selectedPayment.GetPaymentType();
                             paymentAmount = transactions.AddTransaction(paymentType);
                             selectedPayment.SetPaymentAmount(paymentAmount);
-                            selectedPayment.SetAvailableFunds(paymentAmount);
+                            selectedPayment.UpdateAvailableFunds(paymentAmount);
                         }
                         break;
                     case "4":
                     case "list transactions":
+                        Console.Clear();
                         transactions.DisplayAllTransactions();
                         break;
                     case "5":
@@ -182,9 +199,11 @@ class Program
                         break;
                     case "6":
                     case "save budget":
+                        slb.SaveBudget(budget);
                         break;
                     case "7":
                     case "load budget":
+                        budget = slb.LoadBudget(budget);
                         break;
                 }
             }

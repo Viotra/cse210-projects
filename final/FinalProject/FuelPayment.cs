@@ -3,7 +3,7 @@ class FuelPayment : VariablePayment
     int _fuelUps, _fuelUpGoal;
     public FuelPayment(string paymentType = "Fuel") : base(paymentType)
         {
-            Console.WriteLine("How many times a monthy do you fuel up?");
+            Console.WriteLine("How many times a month do you fuel up?");
             Console.ReadLine();
             Console.WriteLine("Would it be possible to lower vehicle usage and limit the number"
             + " of fuel ups? (yes/no)");
@@ -15,6 +15,14 @@ class FuelPayment : VariablePayment
                 _fuelUpGoal = int.Parse(Console.ReadLine());
                 Console.WriteLine($"Your goal has been set to {_fuelUpGoal} fuel ups.");
             }
+        }
+    public FuelPayment(string paymentType, float spendingLimit, float paymentAmount, float availableFunds
+        , float monthlyPayment, bool inLimit, float maxPayment, int fuelUps, int fuelUpGoal, bool isFixedPayment
+         = false) : base(paymentType, spendingLimit, paymentAmount, availableFunds, monthlyPayment, inLimit, 
+         maxPayment, isFixedPayment)
+        {
+            _fuelUpGoal = fuelUpGoal;
+            _fuelUps = fuelUps;
         }
 
     public int GetFuelUpGoal()

@@ -7,8 +7,15 @@ class VariablePayment : Payment
     {
         _isFixedPayment = false;
         SetMonthlyPayment();
-        SetMaxPayment();
     }
+
+    public VariablePayment(string paymentType, float spendingLimit, float paymentAmount, float availableFunds
+        , float monthlyPayment, bool inLimit, float maxPayment, bool isFixedPayment = false) : base(paymentType
+        , spendingLimit, paymentAmount, availableFunds, monthlyPayment
+        , inLimit, isFixedPayment)
+        {
+            _maxPayment = maxPayment;
+        }
 
     public void SetUnnecessaryPayment(float paymentAmount)
     {
@@ -25,14 +32,6 @@ class VariablePayment : Payment
     {
         Console.WriteLine("What do you believe is the maximum you would pay each month?");
         _maxPayment = float.Parse(Console.ReadLine());
-    }
-
-    public override void SetInLimit()
-    {
-        if (GetPaymentAmount() > _maxPayment)
-        {
-            _inLimit = false;
-        }
     }
 
     public float GetMaxPayment()

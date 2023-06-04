@@ -5,6 +5,14 @@ class EntertainmentPayment : VariablePayment
 
         }
 
+     public EntertainmentPayment(string paymentType, float spendingLimit, float paymentAmount, float availableFunds
+        , float monthlyPayment, bool inLimit, float maxPayment, bool isFixedPayment = false) : base(
+        paymentType, spendingLimit, paymentAmount, availableFunds, monthlyPayment, inLimit, maxPayment, 
+        isFixedPayment)
+        {
+            
+        }
+
     public override void SetMaxPayment()
     {
         Console.WriteLine("As entertainment is harder to put down for an exact amount, please enter an upper spending "
@@ -14,6 +22,6 @@ class EntertainmentPayment : VariablePayment
     public override void SetPaymentAmount(float paymentAmount)
     {
         base.SetPaymentAmount(paymentAmount);
-        
+
     }
 }

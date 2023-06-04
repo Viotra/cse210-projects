@@ -11,6 +11,24 @@ public abstract class Payment
         _paymentType = paymentType;
     }
 
+    public Payment(string paymentType, float spendingLimit, float paymentAmount, float availableFunds
+        , float monthlyPayment, bool inLimit, bool isFixedPayment)
+        {
+            _paymentType = paymentType;
+            _spendingLimit = spendingLimit;
+            _paymentAmount = paymentAmount;
+            _availableFunds = availableFunds;
+            _monthlyPayment = monthlyPayment;
+            _isFixedPayment = isFixedPayment;
+            _inLimit = inLimit;
+        }
+    
+    public Payment(string paymentType, float monthlyPayment, float paymentAmount)
+    {
+        _paymentType = paymentType;
+        _monthlyPayment = monthlyPayment;
+        _paymentAmount = paymentAmount;
+    }
     public bool GetInLimit()
     {
         SetInLimit();
